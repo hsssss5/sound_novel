@@ -1,0 +1,63 @@
+.shell {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  max-width: 480px;
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+  color: #f5f5f5;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* Variant C: дракон только в safe-area, не под чёлкой / pill-bar */
+.shell::before {
+  content: '';
+  position: fixed;
+  z-index: -2;
+  top: env(safe-area-inset-top, 0px);
+  bottom: calc(env(safe-area-inset-bottom, 0px) + var(--safari-toolbar-clearance, 20px));
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(100%, 480px);
+  background-image: var(--bg-image);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  pointer-events: none;
+}
+
+.shell::after {
+  content: '';
+  position: fixed;
+  z-index: -1;
+  top: env(safe-area-inset-top, 0px);
+  bottom: calc(env(safe-area-inset-bottom, 0px) + var(--safari-toolbar-clearance, 20px));
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(100%, 480px);
+  background-color: #242424;
+  opacity: var(--bg-tint-opacity);
+  pointer-events: none;
+}
+
+.shell > header {
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.main {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  padding: 0 16px;
+  position: relative;
+  z-index: 1;
+}

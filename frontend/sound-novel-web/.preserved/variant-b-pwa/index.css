@@ -1,0 +1,89 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&display=swap');
+@import url('/fonts/circe-slab.css');
+@import url('./pwa.css');
+
+:root {
+  font-family: 'IBM Plex Sans', system-ui, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color: #f5f5f5;
+  background: #242424;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-tap-highlight-color: transparent;
+
+  --content-padding-x: 16px;
+  --header-icon-size: 40px;
+  --overlay-bg: rgba(0, 0, 0, 0.45);
+  --safari-toolbar-clearance: 20px;
+  --bg-tint-opacity: 0.65;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+  height: 100dvh;
+  overflow: hidden;
+  overscroll-behavior: none;
+  background: #242424;
+}
+
+/* Фон-картинка на уровне документа (Variant A) */
+html::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background-image: var(--bg-image);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  pointer-events: none;
+}
+
+/* Затемнение поверх картинки — opacity задаётся из React */
+html::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background-color: #242424;
+  opacity: var(--bg-tint-opacity);
+  pointer-events: none;
+}
+
+body {
+  margin: 0;
+  height: 100%;
+  height: 100dvh;
+  min-width: 320px;
+  overflow: hidden;
+  overscroll-behavior: none;
+  background: transparent;
+}
+
+#root {
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+  z-index: 0;
+  background: transparent;
+}
+
+button {
+  font-family: inherit;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: inherit;
+}

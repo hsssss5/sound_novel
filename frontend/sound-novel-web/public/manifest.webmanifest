@@ -1,0 +1,20 @@
+{
+  "name": "Дело о пропавшем Хранителе",
+  "short_name": "sound_novel",
+  "description": "Звуковая новелла — экскурсия по Адмиралтейскому району",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#242424",
+  "theme_color": "#242424",
+  "lang": "ru",
+  "icons": [
+    {
+      "src": "./favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

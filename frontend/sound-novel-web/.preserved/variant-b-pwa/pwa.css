@@ -1,0 +1,18 @@
+/* Variant B: PWA / standalone (добавлено поверх Variant A) */
+
+@media (display-mode: standalone) {
+  :root {
+    /* В standalone нет pill-панели Safari — убираем лишний отступ */
+    --safari-toolbar-clearance: 0px;
+  }
+}
+
+/* iOS standalone: fallback safe-area если env() сломан (WebKit #301994) */
+@supports (-webkit-touch-callout: none) {
+  @media (display-mode: standalone) {
+    html[data-standalone] {
+      /* Фон уже на html::before — в PWA должен уходить под статус-бар */
+      background: #242424;
+    }
+  }
+}

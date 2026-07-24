@@ -1,0 +1,73 @@
+.button {
+
+  min-height: 48px;
+
+  padding: 12px 20px;
+
+  border: none;
+
+  border-radius: 999px;
+
+  font-family: inherit;
+
+  font-size: 1rem;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+}
+
+
+
+.button:active {
+
+  opacity: 0.85;
+
+}
+
+
+
+.fullWidth {
+
+  width: 100%;
+
+}
+
+
+
+.primary {
+
+  background: #242424;
+
+  color: #f5f5f5;
+
+  border: 1px solid #f5f5f5;
+
+}
+
+
+
+.secondary,
+
+.light {
+
+  background: #f5f5f5;
+
+  color: #242424;
+
+}
+
+
+
+.outline {
+
+  background: transparent;
+
+  color: #f5f5f5;
+
+  border: 1px solid #f5f5f5;
+
+}
+
+

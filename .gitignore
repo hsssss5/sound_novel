@@ -1,0 +1,21 @@
+# Build
+frontend/**/dist/
+frontend/**/node_modules/
+
+# IDE
+.vs/
+.vscode/
+*.user
+*.suo
+
+# Env
+.env
+.env.local
+frontend/**/.env.local
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Logs
+*.log

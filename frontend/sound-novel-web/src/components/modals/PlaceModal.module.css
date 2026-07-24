@@ -1,0 +1,98 @@
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.image {
+  width: 100%;
+  border-radius: 12px;
+  object-fit: cover;
+  background: #eee;
+}
+
+.caption {
+  margin: 0;
+  font-size: 1rem;
+  color: #242424;
+}
+
+.captionSource {
+  margin: 0;
+  font-size: 0.8125rem;
+  font-weight: 300;
+  font-style: italic;
+  color: #242424;
+}
+
+.cardTitle {
+  margin: 0;
+  font-family: 'Circe Slab C', serif;
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #242424;
+}
+
+.textToggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  margin: 4px 0 0;
+  padding: 12px 0;
+  border: none;
+  border-top: 1px solid rgba(36, 36, 36, 0.12);
+  background: transparent;
+  font: inherit;
+  font-weight: 700;
+  text-align: left;
+  color: #242424;
+  cursor: pointer;
+}
+
+.chevron {
+  flex-shrink: 0;
+  color: #242424;
+  transition: transform 0.2s ease;
+}
+
+.chevronOpen {
+  transform: rotate(180deg);
+}
+
+.textBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.dates {
+  margin: 0;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  line-height: 1.5;
+  color: #242424;
+  white-space: pre-line;
+}
+
+.text {
+  margin: 0;
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: #242424;
+  white-space: pre-line;
+}
+
+.extra {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 8px;
+}
