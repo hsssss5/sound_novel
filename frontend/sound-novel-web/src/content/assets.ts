@@ -4,6 +4,7 @@ export const assets = {
   background: assetUrl('assets/фон.png'),
   frame: assetUrl('assets/рамка.png'),
   logo: assetUrl('assets/Знаки Чб выворотка_Ismailovskaya.png'),
+  headerLogo: assetUrl('assets/header-logo.png'),
   mapSegments: {
     '1-2': assetUrl('assets/1-2 отрезок.png'),
     '2-3': assetUrl('assets/2-3 отрезок.png'),

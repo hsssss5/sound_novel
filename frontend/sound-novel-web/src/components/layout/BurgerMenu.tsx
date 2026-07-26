@@ -5,8 +5,10 @@ import styles from './BurgerMenu.module.css'
 interface BurgerMenuProps {
   open: boolean
   onClose: () => void
+  onOpenTour: () => void
   onOpenDossier: () => void
-  onOpenTeam: () => void
+  onOpenAbout: () => void
+  onOpenLegends: () => void
   onOpenMap: () => void
   onOpenFeedback: () => void
 }
@@ -14,8 +16,10 @@ interface BurgerMenuProps {
 export function BurgerMenu({
   open,
   onClose,
+  onOpenTour,
   onOpenDossier,
-  onOpenTeam,
+  onOpenAbout,
+  onOpenLegends,
   onOpenMap,
   onOpenFeedback,
 }: BurgerMenuProps) {
@@ -50,13 +54,23 @@ export function BurgerMenu({
         </button>
         <ul className={styles.list}>
           <li className={styles.item}>
+            <button type="button" className={styles.link} onClick={() => handle(onOpenTour)}>
+              Экскурсия
+            </button>
+          </li>
+          <li className={styles.item}>
             <button type="button" className={styles.link} onClick={() => handle(onOpenDossier)}>
               Досье персонажей
             </button>
           </li>
           <li className={styles.item}>
-            <button type="button" className={styles.link} onClick={() => handle(onOpenTeam)}>
-              Команда проекта
+            <button type="button" className={styles.link} onClick={() => handle(onOpenAbout)}>
+              О проекте
+            </button>
+          </li>
+          <li className={styles.item}>
+            <button type="button" className={styles.link} onClick={() => handle(onOpenLegends)}>
+              Легенды вашего двора
             </button>
           </li>
           <li className={styles.item}>

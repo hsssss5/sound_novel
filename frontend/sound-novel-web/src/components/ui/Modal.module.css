@@ -7,13 +7,17 @@
   align-items: flex-end;
   justify-content: center;
   padding: 0;
+  overflow: hidden;
+  overscroll-behavior: none;
   cursor: pointer;
 }
 
 .panel {
+  position: relative;
   width: 100%;
   max-width: 480px;
-  max-height: 100dvh;
+  max-height: 100%;
+  max-height: 100svh;
   border-radius: 16px 16px 0 0;
   display: flex;
   flex-direction: column;
@@ -34,7 +38,8 @@
   color: #242424;
 }
 
-.white .close {
+.white .close,
+.white .closeFloating {
   color: #242424;
   opacity: 1;
 }
@@ -66,11 +71,35 @@
   opacity: 0.8;
 }
 
+.closeFloating {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 20;
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.18);
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  color: #242424;
+}
+
 .body {
+  flex: 1 1 auto;
+  min-height: 0;
   overflow-y: auto;
+  overscroll-behavior: contain;
   padding: 0 16px 24px;
   padding-bottom: calc(24px + env(safe-area-inset-bottom, 0px) + var(--safari-toolbar-clearance, 0px));
   -webkit-overflow-scrolling: touch;
+}
+
+.bodyFlush {
+  padding-top: 0;
 }
 
 @keyframes slideUp {
@@ -90,6 +119,6 @@
 
   .panel {
     border-radius: 16px;
-    max-height: 90dvh;
+    max-height: 90svh;
   }
 }

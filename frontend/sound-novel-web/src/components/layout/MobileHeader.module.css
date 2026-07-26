@@ -17,22 +17,12 @@
   }
 }
 
-.logoWrap {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.spacer {
   min-width: 0;
 }
 
-.logo {
-  display: block;
-  height: 32px;
-  width: auto;
-  max-width: 88px;
-  object-fit: contain;
-}
-
-.iconBtn {
+.iconBtn,
+.logoMark {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -42,10 +32,20 @@
   border: none;
   background: transparent;
   color: #f5f5f5;
-  cursor: pointer;
   flex-shrink: 0;
+}
+
+.iconBtn {
+  cursor: pointer;
 }
 
 .iconBtn:active {
   opacity: 0.7;
+}
+
+.headerLogo {
+  display: block;
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
 }

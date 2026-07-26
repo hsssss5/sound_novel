@@ -1,0 +1,17 @@
+.backToTour {
+  align-self: flex-start;
+  margin: 0 0 8px;
+  padding: 8px 0;
+  border: none;
+  background: transparent;
+  font: inherit;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: #f5f5f5;
+  cursor: pointer;
+  opacity: 0.85;
+}
+
+.backToTour:active {
+  opacity: 0.6;
+}

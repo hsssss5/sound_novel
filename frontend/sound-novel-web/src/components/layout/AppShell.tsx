@@ -10,9 +10,11 @@ interface AppShellProps {
   menuOpen: boolean
   onOpenMenu: () => void
   onCloseMenu: () => void
+  onOpenTour: () => void
   onOpenMap: () => void
   onOpenDossier: () => void
-  onOpenTeam: () => void
+  onOpenAbout: () => void
+  onOpenLegends: () => void
   onOpenFeedback: () => void
 }
 
@@ -22,9 +24,11 @@ export function AppShell({
   menuOpen,
   onOpenMenu,
   onCloseMenu,
+  onOpenTour,
   onOpenMap,
   onOpenDossier,
-  onOpenTeam,
+  onOpenAbout,
+  onOpenLegends,
   onOpenFeedback,
 }: AppShellProps) {
   return (
@@ -35,8 +39,10 @@ export function AppShell({
       <BurgerMenu
         open={menuOpen}
         onClose={onCloseMenu}
+        onOpenTour={onOpenTour}
         onOpenDossier={onOpenDossier}
-        onOpenTeam={onOpenTeam}
+        onOpenAbout={onOpenAbout}
+        onOpenLegends={onOpenLegends}
         onOpenMap={onOpenMap}
         onOpenFeedback={onOpenFeedback}
       />

@@ -1,4 +1,5 @@
 import { assets } from '../../content/assets'
+import { useHeaderChrome } from './HeaderChromeContext'
 import styles from './MobileHeader.module.css'
 
 interface MobileHeaderProps {
@@ -7,19 +8,25 @@ interface MobileHeaderProps {
 }
 
 export function MobileHeader({ onOpenMenu, onOpenMap }: MobileHeaderProps) {
+  const { showBrandLogo } = useHeaderChrome()
+
   return (
     <header className={styles.header}>
       <button type="button" className={styles.iconBtn} onClick={onOpenMenu} aria-label="Меню">
         <MenuIcon />
       </button>
 
-      <div className={styles.logoWrap}>
-        <img src={assets.logo} alt="" className={styles.logo} />
-      </div>
+      <div className={styles.spacer} aria-hidden="true" />
 
-      <button type="button" className={styles.iconBtn} onClick={onOpenMap} aria-label="Карта">
-        <MapIcon />
-      </button>
+      {showBrandLogo ? (
+        <div className={styles.logoMark}>
+          <img src={assets.headerLogo} alt="" className={styles.headerLogo} />
+        </div>
+      ) : (
+        <button type="button" className={styles.iconBtn} onClick={onOpenMap} aria-label="Карта">
+          <MapIcon />
+        </button>
+      )}
     </header>
   )
 }
@@ -36,12 +43,12 @@ function MapIcon() {
   return (
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
       <path
-        d="M3 6l6-2 6 2 6-2v14l-6 2-6-2-6 2V6z"
+        d="M9 4.5l6 2.5 5-2v14.5l-5 2-6-2.5-5 2V6.5l5-2z"
         stroke="currentColor"
         strokeWidth="1.5"
         strokeLinejoin="round"
       />
-      <path d="M9 4v14M15 6v14" stroke="currentColor" strokeWidth="1.5" />
+      <path d="M9 4.5v14M15 7v14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
     </svg>
   )
 }

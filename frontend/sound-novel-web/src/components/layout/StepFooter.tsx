@@ -8,3 +8,7 @@ interface StepFooterProps {
 export function StepFooter({ children }: StepFooterProps) {
   return <footer className={styles.footer}>{children}</footer>
 }
+
+export function StepNav({ children }: StepFooterProps) {
+  return <div className={styles.nav}>{children}</div>
+}
