@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;700&display=swap');
 @import url('./pwa.css');
 
 :root {
@@ -96,8 +96,8 @@ html::before {
   inset: 0;
   z-index: -2;
   background-image: var(--bg-image);
-  background-position: center;
-  background-size: cover;
+  background-position: var(--bg-position, center);
+  background-size: var(--bg-size, cover);
   background-repeat: no-repeat;
   pointer-events: none;
 }

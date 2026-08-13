@@ -23,8 +23,29 @@ export function TourView() {
       return
     }
     setShowBrandLogo(currentStep.type === 'start')
-    return () => setShowBrandLogo(false)
-  }, [hydrated, currentStep.type, setShowBrandLogo])
+
+    const root = document.documentElement
+    const opacity = currentStep.overlayOpacity ?? 0.35
+    root.style.setProperty('--bg-tint-opacity', String(1 - opacity))
+
+    if (currentStep.type === 'start') {
+      root.style.setProperty('--bg-size', 'auto 100%')
+      root.style.setProperty('--bg-position', 'center top')
+      root.style.setProperty('--bg-edge-blend', '40px')
+    } else {
+      root.style.removeProperty('--bg-size')
+      root.style.removeProperty('--bg-position')
+      root.style.setProperty('--bg-edge-blend', '96px')
+    }
+
+    return () => {
+      setShowBrandLogo(false)
+      root.style.removeProperty('--bg-size')
+      root.style.removeProperty('--bg-position')
+      root.style.setProperty('--bg-edge-blend', '96px')
+      root.style.setProperty('--bg-tint-opacity', '0.65')
+    }
+  }, [hydrated, currentStep.type, currentStep.overlayOpacity, setShowBrandLogo])
 
   const openSecondary = useCallback(() => {
     const action = currentStep.secondaryAction
