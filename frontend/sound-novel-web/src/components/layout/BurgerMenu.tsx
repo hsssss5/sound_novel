@@ -55,7 +55,7 @@ export function BurgerMenu({
         <ul className={styles.list}>
           <li className={styles.item}>
             <button type="button" className={styles.link} onClick={() => handle(onOpenTour)}>
-              Экскурсия
+              История
             </button>
           </li>
           <li className={styles.item}>

@@ -1,15 +1,18 @@
 import { useCallback, useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { placeMaterials } from '../content/placeMaterials'
 import type { PlaceMaterial } from '../content/types'
 import { useTourProgress } from '../hooks/useTourProgress'
 import { useHeaderChrome } from './layout/HeaderChromeContext'
+import styles from './TourView.module.css'
 import { PlaceModal } from './modals/PlaceModal'
 import { ResumeDialog } from './ResumeDialog'
-import { CheckpointStep, TransitStep } from './steps/RouteStepPage'
+import { CheckpointStep, FinaleStep, TransitStep } from './steps/RouteStepPage'
 import { StartPage } from './steps/StartPage'
-import { InstructionPage, WelcomePage } from './steps/TextStepPage'
+import { InstructionPage, SynopsisPage, WelcomePage } from './steps/TextStepPage'
 
 export function TourView() {
+  const navigate = useNavigate()
   const { currentStep, stepIndex, goNext, goBack, hydrated, showResumeDialog, resume, restart } =
     useTourProgress()
   const { setShowBrandLogo } = useHeaderChrome()
@@ -58,6 +61,14 @@ export function TourView() {
             onBack={canGoBack ? goBack : undefined}
           />
         )
+      case 'synopsis':
+        return (
+          <SynopsisPage
+            body={currentStep.body ?? ''}
+            onNext={goNext}
+            onBack={canGoBack ? goBack : undefined}
+          />
+        )
       case 'instructions':
         return (
           <InstructionPage
@@ -84,13 +95,21 @@ export function TourView() {
             onSecondary={currentStep.secondaryAction ? openSecondary : undefined}
           />
         )
+      case 'finale':
+        return (
+          <FinaleStep
+            step={currentStep}
+            onNext={() => navigate('/complete')}
+            onBack={canGoBack ? goBack : undefined}
+          />
+        )
       default:
         return null
     }
   }
 
   return (
-    <>
+    <div className={styles.root}>
       {renderStep()}
       <ResumeDialog open={showResumeDialog} onResume={resume} onRestart={restart} />
       <PlaceModal
@@ -98,6 +117,6 @@ export function TourView() {
         materials={placeMaterialsOpen}
         onClose={() => setPlaceMaterialsOpen([])}
       />
-    </>
+    </div>
   )
 }

@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import type { TourStep } from '../../content/types'
 import { assets } from '../../content/assets'
 import { StepFooter, StepNav } from '../layout/StepFooter'
@@ -13,42 +12,39 @@ interface RouteStepPageProps {
   onSecondary?: () => void
 }
 
-function LocationImage({ src }: { src: string }) {
+function BodyText({ body }: { body: string }) {
   return (
-    <div className={styles.locationFrame}>
-      <img src={assets.frame} alt="" className={styles.frameBg} aria-hidden="true" />
-      <img src={src} alt="" className={styles.locationImage} />
+    <>
+      {body.split('\n\n').map((paragraph) => (
+        <p key={paragraph} className={styles.body}>
+          {paragraph}
+        </p>
+      ))}
+    </>
+  )
+}
+
+function SquarePhoto({ src }: { src: string }) {
+  return (
+    <div className={styles.photoWrap}>
+      <img src={src} alt="" className={styles.photo} />
     </div>
   )
 }
 
 function MapImage({ src }: { src: string }) {
-  const [zoomed, setZoomed] = useState(false)
-
   return (
-    <>
-      <button type="button" className={styles.mapButton} onClick={() => setZoomed(true)}>
-        <img src={src} alt="" className={styles.mapImage} />
-      </button>
-      {zoomed && (
-        <div className={styles.zoomOverlay} onClick={() => setZoomed(false)} role="presentation">
-          <img src={src} alt="" className={styles.zoomImage} />
-        </div>
-      )}
-    </>
+    <div className={styles.mapWrap}>
+      <img src={src} alt="" className={styles.mapImage} />
+    </div>
   )
 }
 
-function StepActions({
-  step,
-  onNext,
-  onBack,
-  onSecondary,
-}: RouteStepPageProps) {
+function StepActions({ step, onNext, onBack, onSecondary }: RouteStepPageProps) {
   return (
     <StepFooter>
       {step.secondaryAction && onSecondary && (
-        <Button variant="light" onClick={onSecondary}>
+        <Button variant="primary" onClick={onSecondary}>
           {step.secondaryAction.label}
         </Button>
       )}
@@ -67,12 +63,14 @@ function StepActions({
 }
 
 export function CheckpointStep({ step, onNext, onBack, onSecondary }: RouteStepPageProps) {
+  const showPlayer = step.hasAudio !== false
+
   return (
     <div className={styles.page}>
       <div className={styles.content}>
-        {step.locationImageUrl && <LocationImage src={step.locationImageUrl} />}
-        {step.body && <p className={styles.body}>{step.body}</p>}
-        <AudioPlayer src={step.audioUrl} />
+        {step.locationImageUrl && <SquarePhoto src={step.locationImageUrl} />}
+        {step.body && <BodyText body={step.body} />}
+        {showPlayer && <AudioPlayer src={step.audioUrl} />}
       </div>
       <StepActions step={step} onNext={onNext} onBack={onBack} onSecondary={onSecondary} />
     </div>
@@ -80,15 +78,43 @@ export function CheckpointStep({ step, onNext, onBack, onSecondary }: RouteStepP
 }
 
 export function TransitStep({ step, onNext, onBack, onSecondary }: RouteStepPageProps) {
+  const showPlayer = step.hasAudio === true
+
   return (
     <div className={styles.page}>
       <div className={styles.content}>
         {step.mapImageUrl && <MapImage src={step.mapImageUrl} />}
         {step.travelTime && <p className={styles.travelTime}>Время в пути — {step.travelTime}.</p>}
-        {step.body && <p className={styles.body}>{step.body}</p>}
-        <AudioPlayer src={step.audioUrl} />
+        {step.body && <BodyText body={step.body} />}
+        {showPlayer && <AudioPlayer src={step.audioUrl} />}
       </div>
       <StepActions step={step} onNext={onNext} onBack={onBack} onSecondary={onSecondary} />
+    </div>
+  )
+}
+
+export function FinaleStep({ step, onNext, onBack }: Omit<RouteStepPageProps, 'onSecondary'>) {
+  return (
+    <div className={styles.page}>
+      <div className={styles.content}>
+        {step.body && <BodyText body={step.body} />}
+        <div className={styles.playerBlock}>
+          <img src={assets.finaleCat} alt="" className={styles.finaleCat} />
+          {step.hasAudio !== false && <AudioPlayer src={step.audioUrl} />}
+        </div>
+      </div>
+      <StepFooter>
+        <StepNav>
+          {onBack && (
+            <Button variant="outline" fullWidth={false} size="compact" onClick={onBack}>
+              Назад
+            </Button>
+          )}
+          <Button variant="light" fullWidth={false} size="compact" onClick={onNext}>
+            Далее
+          </Button>
+        </StepNav>
+      </StepFooter>
     </div>
   )
 }

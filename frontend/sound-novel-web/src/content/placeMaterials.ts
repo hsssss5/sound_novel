@@ -12,6 +12,8 @@ export const placeMaterials: Record<string, PlaceMaterial> = {
 
     title: 'Дом «Помещика» (Измайловский пр-т, 16/30)',
 
+    imageUrl: assets.photos.pomeshchik,
+
     caption: 'Санкт-Петербург, 2026 год',
 
   },
@@ -36,7 +38,7 @@ export const placeMaterials: Record<string, PlaceMaterial> = {
 
     id: 'mendeleev',
 
-    title: 'Памятник Д. И. Менделееву',
+    title: 'Памятник Д. И. Менделееву (Московский пр-т, 19)',
 
     imageUrl: assets.photos.mendeleev,
 
@@ -88,7 +90,7 @@ export const placeMaterials: Record<string, PlaceMaterial> = {
 
     title: 'Памятник Человеку-невидимке',
 
-    imageUrl: assets.photos.invisibleMan1,
+    imageUrl: assets.photos.invisibleMain,
 
     caption: 'Санкт-Петербург, 2026 год',
 
@@ -108,7 +110,7 @@ export const placeMaterials: Record<string, PlaceMaterial> = {
 
       {
 
-        imageUrl: assets.photos.invisibleMan2,
+        imageUrl: assets.photos.invisibleHistoric,
 
         caption: 'Памятник императору Александру II. Открытка. 1900-е годы',
 
@@ -150,7 +152,7 @@ export const placeMaterials: Record<string, PlaceMaterial> = {
 
     title: 'Египетский мост',
 
-    imageUrl: assets.photos.egyptian1,
+    imageUrl: assets.photos.egyptianMain,
 
     caption: 'Санкт-Петербург, 2026 год',
 
@@ -170,7 +172,7 @@ export const placeMaterials: Record<string, PlaceMaterial> = {
 
       {
 
-        imageUrl: assets.photos.egyptian2,
+        imageUrl: assets.photos.egyptianCollapse,
 
         caption:
 
@@ -202,7 +204,7 @@ export const placeMaterials: Record<string, PlaceMaterial> = {
 
     id: 'naval_cathedral',
 
-    title: 'Николо-Богоявленский морской собор (Никольская пл., 1/3)',
+    title: 'Никольский Морской собор (Никольская пл., 1/3)',
 
     imageUrl: assets.photos.navalCathedral,
 
@@ -234,7 +236,7 @@ export const placeMaterials: Record<string, PlaceMaterial> = {
 
     title: 'Литовский замок и его ангел(ы) (ул. Декабристов, 29 / наб. Мойки, 102 / наб. Крюкова канала, 3)',
 
-    imageUrl: assets.photos.litovsky1,
+    imageUrl: assets.photos.litovskyFacade,
 
     caption:
 
@@ -260,7 +262,7 @@ export const placeMaterials: Record<string, PlaceMaterial> = {
 
       {
 
-        imageUrl: assets.photos.litovsky2,
+        imageUrl: assets.photos.litovskyBurned,
 
         caption:
 
@@ -318,11 +320,12 @@ export const placeMaterials: Record<string, PlaceMaterial> = {
 
     title: 'Переулок Бринько / Сенная площадь',
 
-    imageUrl: assets.photos.senna1,
+    imageUrl: assets.photos.sennaMarket,
 
-    caption: 'Вид Сенной площади. Картина Фердинанда Перро. 1841 год',
+    caption:
+      'Шесть фотографий на одном паспарту с видами различных зданий Санкт-Петербурга. Рынок на Сенной площади',
 
-    captionSource: 'Государственный Эрмитаж, Санкт-Петербург',
+    captionSource: 'Автор неизвестен. Санкт-Петербург, 1860-е годы // Государственный Эрмитаж, Санкт-Петербург',
 
     text: `Сенная площадь издавна считалась «нехорошим местом» Санкт-Петербурга.Сейчас это центр города, однако в первой половине XVIII  века эта местность была окраиной, где рос лес. Местные, тем не менее, не спешили туда за грибами и ягодами — по слухам, в этом лесу гибли люди, а в чаще обитали змеи, охранявшие вход в иной мир. После того как на этом месте по приказу императрицы Анны Иоанновны был организован рынок для торговли сеном (отсюда и название — Сенная), его репутация не улучшилась. Сенной рынок прозвали «чревом Петербурга» из-за обилия дешевых трактиров, соседствовавших с прилавками, где продавали сено и скоропортящиеся продукты, часто начинавшие гнить на жаре.
 
@@ -342,11 +345,9 @@ export const placeMaterials: Record<string, PlaceMaterial> = {
 
       {
 
-        imageUrl: assets.photos.senna2,
+        imageUrl: assets.photos.sennaView,
 
-        caption:
-
-          'Шесть фотографий на одном паспарту с видами различных зданий Санкт-Петербурга. Рынок на Сенной площади. Автор неизвестен. Санкт-Петербург, 1860-е годы',
+        caption: 'Вид Сенной площади. Картина Фердинанда Перро. 1841 год',
 
         captionSource: 'Государственный Эрмитаж, Санкт-Петербург',
 
@@ -362,7 +363,7 @@ export const placeMaterials: Record<string, PlaceMaterial> = {
 
 export const listenHistoryAction = {
 
-  label: 'Послушать историю',
+  label: 'Послушать историю по пути',
 
 } as const
 

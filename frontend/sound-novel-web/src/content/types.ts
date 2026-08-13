@@ -1,4 +1,11 @@
-export type StepType = 'start' | 'welcome' | 'instructions' | 'checkpoint' | 'transit' | 'finale'
+export type StepType =
+  | 'start'
+  | 'welcome'
+  | 'synopsis'
+  | 'instructions'
+  | 'checkpoint'
+  | 'transit'
+  | 'finale'
 
 export interface PlaceMaterial {
   id: string
@@ -33,23 +40,14 @@ export interface TourStep {
   subtitle?: string
   body?: string
   audioUrl?: string
+  /** Показывать встроенный плеер на шаге (по референсам — не на всех transit) */
+  hasAudio?: boolean
   mapImageUrl?: string
   locationImageUrl?: string
   travelTime?: string
   overlayOpacity?: number
   secondaryAction?: SecondaryAction
   location?: GeoPoint
-}
-
-export interface CharacterDossier {
-  id: string
-  name: string
-  age: string
-  zodiac: string
-  photoUrl: string
-  occupation: string
-  about: string
-  funFact: string
 }
 
 export interface TeamMember {

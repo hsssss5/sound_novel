@@ -1,14 +1,13 @@
 import { get2GisRouteUrl, getYandexMapsRouteUrl, routePoints } from '../../content/mapLinks'
 import styles from './MapPage.module.css'
-import pageStyles from './SimplePage.module.css'
 
 export function MapPage() {
   const yandexUrl = getYandexMapsRouteUrl()
   const gisUrl = get2GisRouteUrl()
 
   return (
-    <div className={pageStyles.page}>
-      <h1 className={pageStyles.title}>Маршрут</h1>
+    <div className={styles.page}>
+      <h1 className={styles.title}>Маршрут</h1>
       <div className={styles.panel}>
         <ol className={styles.list}>
           {routePoints.map((point, index) => (

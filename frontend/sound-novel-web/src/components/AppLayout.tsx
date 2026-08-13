@@ -34,7 +34,7 @@ export function AppLayout() {
             className={styles.backToTour}
             onClick={() => navigate('/')}
           >
-            ← К экскурсии
+            ← К истории
           </button>
         )}
         <Outlet />

@@ -1,10 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@700&display=swap');
 @import url('./pwa.css');
 
 :root {
   font-family: 'IBM Plex Sans', system-ui, sans-serif;
   line-height: 1.5;
-  font-weight: 400;
+  font-weight: 700;
   color: #f5f5f5;
   background: #242424;
   font-synthesis: none;

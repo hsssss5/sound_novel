@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react'
 import { createPortal } from 'react-dom'
-import { characters } from '../../content/characters'
+import { characterRows, charactersById } from '../../content/characters'
 import styles from './CharactersPage.module.css'
 
 export function CharactersPage() {
   const [activeId, setActiveId] = useState<string | null>(null)
-  const active = characters.find((c) => c.id === activeId) ?? null
+  const active = activeId ? charactersById[activeId] : null
 
   useEffect(() => {
     if (!active) {
@@ -28,16 +28,23 @@ export function CharactersPage() {
   return (
     <div className={styles.page}>
       <div className={styles.grid}>
-        {characters.map((character) => (
-          <button
-            key={character.id}
-            type="button"
-            className={styles.card}
-            onClick={() => setActiveId(character.id)}
-          >
-            <img src={character.thumbUrl} alt="" className={styles.photo} />
-            <span className={styles.name}>{character.name}</span>
-          </button>
+        {characterRows.map((row) => (
+          <div key={row.join('-')} className={styles.row}>
+            {row.map((id) => {
+              const character = charactersById[id]
+              return (
+                <button
+                  key={character.id}
+                  type="button"
+                  className={styles.card}
+                  onClick={() => setActiveId(character.id)}
+                >
+                  <img src={character.thumbUrl} alt="" className={styles.photo} />
+                  <span className={styles.name}>{character.name}</span>
+                </button>
+              )
+            })}
+          </div>
         ))}
       </div>
 

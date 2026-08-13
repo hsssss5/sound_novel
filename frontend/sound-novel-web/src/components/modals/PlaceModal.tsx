@@ -17,6 +17,14 @@ function isPlaceMetaCaption(caption?: string, captionSource?: string) {
   return /^Санкт-Петербург/i.test(caption)
 }
 
+function splitTitle(title: string) {
+  const match = title.match(/^(.+?)\s(\([^)]+\))$/)
+  if (!match) {
+    return { line1: title, line2: null as string | null }
+  }
+  return { line1: match[1], line2: match[2] }
+}
+
 function ChevronIcon({ open }: { open: boolean }) {
   return (
     <svg
@@ -38,10 +46,23 @@ function ChevronIcon({ open }: { open: boolean }) {
   )
 }
 
+function TextParagraphs({ text }: { text: string }) {
+  return (
+    <>
+      {text.split('\n\n').map((paragraph) => (
+        <p key={paragraph} className={styles.textPara}>
+          {paragraph}
+        </p>
+      ))}
+    </>
+  )
+}
+
 function TextSection({ material }: { material: PlaceMaterial }) {
   const [textOpen, setTextOpen] = useState(false)
   const hasText = Boolean(material.text || material.dates)
-  if (!hasText) {
+  const hasExtras = Boolean(material.extraImages?.length)
+  if (!hasText && !hasExtras) {
     return null
   }
 
@@ -53,8 +74,23 @@ function TextSection({ material }: { material: PlaceMaterial }) {
       </button>
       {textOpen && (
         <div className={styles.textBlock}>
-          {material.dates && <p className={styles.dates}>{material.dates}</p>}
-          {material.text && <p className={styles.text}>{material.text}</p>}
+          {material.dates && (
+            <p className={styles.dates}>
+              {material.dates.split('\n').map((line) => (
+                <span key={line} className={styles.datesLine}>
+                  {line}
+                </span>
+              ))}
+            </p>
+          )}
+          {material.text && <TextParagraphs text={material.text} />}
+          {material.extraImages?.map((extra) => (
+            <div key={extra.imageUrl} className={styles.extra}>
+              <img src={extra.imageUrl} alt="" className={styles.image} />
+              {extra.caption && <p className={styles.caption}>{extra.caption}</p>}
+              {extra.captionSource && <p className={styles.captionSource}>{extra.captionSource}</p>}
+            </div>
+          ))}
         </div>
       )}
     </>
@@ -66,16 +102,14 @@ function MaterialBlock({ material }: { material: PlaceMaterial }) {
   const hasText = Boolean(material.text || material.dates)
   const hasExtras = Boolean(material.extraImages?.length)
 
-  // Заглушка без фото и текста — не рендерим (иначе заголовок/плеер висят над следующей картинкой)
   if (!hasImage && !hasText && !hasExtras) {
     return null
   }
 
-  // Только текст (легенда без фото) — без плеера и блока «под линией»
   if (!hasImage) {
     return (
       <article className={styles.card}>
-        <h3 className={styles.cardTitle}>{material.title}</h3>
+        <TitleBlock title={material.title} />
         <TextSection material={material} />
       </article>
     )
@@ -87,11 +121,13 @@ function MaterialBlock({ material }: { material: PlaceMaterial }) {
 
   return (
     <article className={styles.card}>
-      <img src={material.imageUrl} alt="" className={styles.image} />
+      <div className={styles.imageWrap}>
+        <img src={material.imageUrl} alt="" className={styles.image} />
+      </div>
       {photoCaption && <p className={styles.caption}>{photoCaption}</p>}
       {material.captionSource && <p className={styles.captionSource}>{material.captionSource}</p>}
 
-      <h3 className={styles.cardTitle}>{material.title}</h3>
+      <TitleBlock title={material.title} />
 
       <div className={styles.divider} />
 
@@ -100,15 +136,17 @@ function MaterialBlock({ material }: { material: PlaceMaterial }) {
       <AudioPlayer />
 
       <TextSection material={material} />
-
-      {material.extraImages?.map((extra) => (
-        <div key={extra.imageUrl} className={styles.extra}>
-          <img src={extra.imageUrl} alt="" className={styles.image} />
-          {extra.caption && <p className={styles.caption}>{extra.caption}</p>}
-          {extra.captionSource && <p className={styles.captionSource}>{extra.captionSource}</p>}
-        </div>
-      ))}
     </article>
+  )
+}
+
+function TitleBlock({ title }: { title: string }) {
+  const { line1, line2 } = splitTitle(title)
+  return (
+    <div className={styles.titleBlock}>
+      <h3 className={styles.cardTitle}>{line1}</h3>
+      {line2 && <p className={styles.cardTitleSub}>{line2}</p>}
+    </div>
   )
 }
 

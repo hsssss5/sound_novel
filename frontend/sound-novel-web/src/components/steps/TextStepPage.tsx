@@ -9,6 +9,14 @@ interface TextStepPageProps {
   onBack?: () => void
 }
 
+export function SynopsisPage({
+  body,
+  onNext,
+  onBack,
+}: Omit<TextStepPageProps, 'primaryLabel'>) {
+  return <TextStepPage body={body} primaryLabel="Далее" onNext={onNext} onBack={onBack} />
+}
+
 export function WelcomePage({
   body,
   onNext,
@@ -23,7 +31,28 @@ export function InstructionPage({
   onBack,
 }: Omit<TextStepPageProps, 'primaryLabel'>) {
   return (
-    <TextStepPage body={body} primaryLabel="Начать прохождение" onNext={onNext} onBack={onBack} />
+    <TextStepPage
+      body={body}
+      primaryLabel="Начать прохождение"
+      onNext={onNext}
+      onBack={onBack}
+    />
+  )
+}
+
+export function CompletePage({ body }: { body: string }) {
+  const paragraphs = body.split('\n\n')
+
+  return (
+    <div className={styles.page}>
+      <div className={styles.content}>
+        {paragraphs.map((paragraph) => (
+          <p key={paragraph} className={styles.body}>
+            {paragraph}
+          </p>
+        ))}
+      </div>
+    </div>
   )
 }
 

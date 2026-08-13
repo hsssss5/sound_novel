@@ -2,16 +2,24 @@
   flex: 1;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   padding: 8px 0 24px;
 }
 
 .grid {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 16px 12px;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
   max-width: 360px;
   margin: 0 auto;
+}
+
+.row {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
   width: 100%;
 }
 
@@ -22,7 +30,7 @@
   gap: 8px;
   width: calc((100% - 24px) / 3);
   min-width: 96px;
-  max-width: 112px;
+  max-width: 108px;
   padding: 0;
   border: none;
   background: transparent;
@@ -35,14 +43,13 @@
   width: 100%;
   aspect-ratio: 1;
   object-fit: cover;
-  border-radius: 12px;
+  border-radius: 14px;
 }
 
 .name {
-  font-family: 'Circe Slab C', serif;
+  font-weight: 700;
   font-size: 0.8125rem;
-  font-weight: 500;
-  line-height: 1.2;
+  line-height: 1.25;
   text-align: center;
 }
 
@@ -70,7 +77,7 @@
 .lightboxPanel {
   position: relative;
   z-index: 1;
-  max-width: min(420px, 100%);
+  max-width: min(360px, 100%);
   max-height: 100%;
   overflow: auto;
   -webkit-overflow-scrolling: touch;
@@ -92,9 +99,10 @@
   cursor: pointer;
 }
 
-.dossierImage {
+.dossierImage,
+.lightboxImage {
   display: block;
   width: 100%;
   height: auto;
-  border-radius: 4px;
+  border-radius: 14px;
 }

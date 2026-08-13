@@ -2,6 +2,7 @@ import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import { AppLayout } from './components/AppLayout'
 import { AboutPage } from './components/pages/AboutPage'
 import { CharactersPage } from './components/pages/CharactersPage'
+import { CompleteTourPage } from './components/pages/CompleteTourPage'
 import { FeedbackPage } from './components/pages/FeedbackPage'
 import { LegendsPage } from './components/pages/LegendsPage'
 import { MapPage } from './components/pages/MapPage'
@@ -20,6 +21,7 @@ function App() {
           <Route path="about" element={<AboutPage />} />
           <Route path="legends" element={<LegendsPage />} />
           <Route path="map" element={<MapPage />} />
+          <Route path="complete" element={<CompleteTourPage />} />
           <Route path="feedback" element={<FeedbackPage />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Route>
