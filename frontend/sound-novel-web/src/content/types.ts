@@ -15,6 +15,9 @@ export interface PlaceMaterial {
   text?: string
   caption?: string
   captionSource?: string
+  audioUrl?: string
+  hideTitle?: boolean
+  imageObjectPosition?: string
   extraImages?: Array<{
     imageUrl: string
     caption?: string
@@ -50,9 +53,11 @@ export interface TourStep {
   location?: GeoPoint
 }
 
-export interface TeamMember {
+export interface CreditPerson {
   id: string
-  photoUrl: string
-  position: string
+  photoUrl?: string
   role: string
+  name: string
 }
+
+export type TeamMember = CreditPerson

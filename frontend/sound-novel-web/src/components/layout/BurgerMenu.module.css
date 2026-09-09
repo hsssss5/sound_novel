@@ -81,3 +81,34 @@
   opacity: 0.45;
   cursor: default;
 }
+
+.externalLink {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  padding: 12px 0;
+  border: none;
+  background: transparent;
+  text-align: left;
+  font: inherit;
+  font-size: 1rem;
+  color: #242424;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.icon {
+  display: block;
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+  object-position: center;
+}
+
+.iconMcbs {
+  width: 63px;
+  height: 36px;
+}

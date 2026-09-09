@@ -29,13 +29,20 @@
   max-width: min(100%, 340px);
 }
 
+.title {
+  font-family: 'Circe Slab B', 'Circe Slab C', Georgia, serif;
+  font-weight: 700;
+  font-synthesis: none;
+}
+
 .titleLine,
 .subtitleLine {
   white-space: nowrap;
 }
 
 .titleLine {
-  font-weight: 700;
+  font-family: inherit;
+  font-weight: inherit;
   font-size: clamp(1.5rem, 7vw, 2rem);
   line-height: 1.2;
   color: #f5f5f5;

@@ -2,7 +2,8 @@
   display: flex;
   flex-direction: column;
   gap: 28px;
-  font-family: 'Circe Slab C', Georgia, serif;
+  padding-top: 20px;
+  font-family: 'Circe Slab B', 'Circe Slab C', Georgia, serif;
 }
 
 .card {
@@ -92,7 +93,8 @@
 .textToggle {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
+  align-self: stretch;
   gap: 8px;
   width: 100%;
   margin: 0;
@@ -102,7 +104,7 @@
   font-family: inherit;
   font-weight: 700;
   font-size: 1rem;
-  text-align: center;
+  text-align: left;
   color: #242424;
   cursor: pointer;
 }
@@ -120,20 +122,24 @@
 .textBlock {
   display: flex;
   flex-direction: column;
+  align-items: stretch;
   gap: 10px;
   width: 100%;
+  align-self: stretch;
 }
 
 .dates {
   margin: 0;
+  width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  align-items: flex-start;
+  gap: 10px;
   font-family: inherit;
   font-weight: 400;
   font-size: 0.9375rem;
   line-height: 1.45;
-  text-align: center;
+  text-align: left;
   color: #242424;
 }
 
@@ -143,12 +149,21 @@
 
 .textPara {
   margin: 0;
+  width: 100%;
   font-family: inherit;
   font-weight: 400;
   font-size: 0.9375rem;
   line-height: 1.5;
-  text-align: center;
+  text-align: left;
   color: #242424;
+}
+
+.textItalic {
+  font-style: italic;
+}
+
+em.textItalic {
+  font-style: italic;
 }
 
 .extra {

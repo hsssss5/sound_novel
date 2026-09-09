@@ -54,8 +54,9 @@
 
 .title {
   margin: 0;
+  font-family: 'IBM Plex Sans', system-ui, sans-serif;
   font-size: 1.125rem;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .close {

@@ -1,5 +1,16 @@
+/* Circe Slab C — фактические файлы в проекте.
+   Клиент называет гарнитуру «Circe Slab B»; регистрируем оба имени на одни файлы. */
 @font-face {
   font-family: 'Circe Slab C';
+  src: url('CirceSlabC-Bold.woff2') format('woff2'),
+    url('CirceSlabC-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Circe Slab B';
   src: url('CirceSlabC-Bold.woff2') format('woff2'),
     url('CirceSlabC-Bold.woff') format('woff');
   font-weight: 700;
@@ -17,7 +28,25 @@
 }
 
 @font-face {
+  font-family: 'Circe Slab B';
+  src: url('CirceSlabC-Regular.woff2') format('woff2'),
+    url('CirceSlabC-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
   font-family: 'Circe Slab C';
+  src: url('CirceSlabC-Medium.woff2') format('woff2'),
+    url('CirceSlabC-Medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Circe Slab B';
   src: url('CirceSlabC-Medium.woff2') format('woff2'),
     url('CirceSlabC-Medium.woff') format('woff');
   font-weight: 500;

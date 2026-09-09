@@ -1,5 +1,7 @@
 import { useEffect } from 'react'
 import { createPortal } from 'react-dom'
+import { assets } from '../../content/assets'
+import { externalLinks } from '../../content/feedback'
 import styles from './BurgerMenu.module.css'
 
 interface BurgerMenuProps {
@@ -84,10 +86,40 @@ export function BurgerMenu({
             </button>
           </li>
           <li className={styles.item}>
-            <span className={styles.disabled}>Сайт МЦБС</span>
+            <a
+              className={styles.externalLink}
+              href={externalLinks.mcbs.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={onClose}
+            >
+              <span>{externalLinks.mcbs.label}</span>
+              <img
+                className={`${styles.icon} ${styles.iconMcbs}`}
+                src={assets.iconMcbs}
+                alt=""
+                width={98}
+                height={56}
+              />
+            </a>
           </li>
           <li className={styles.item}>
-            <span className={styles.disabled}>Группа ВК</span>
+            <a
+              className={styles.externalLink}
+              href={externalLinks.vk.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={onClose}
+            >
+              <span>{externalLinks.vk.label}</span>
+              <img
+                className={styles.icon}
+                src={assets.iconVk}
+                alt=""
+                width={56}
+                height={56}
+              />
+            </a>
           </li>
         </ul>
       </nav>

@@ -46,14 +46,52 @@ function ChevronIcon({ open }: { open: boolean }) {
   )
 }
 
+function renderRichText(paragraph: string) {
+  const parts = paragraph.split(/(\*[^*]+\*)/g)
+  return parts.map((part, index) => {
+    if (part.startsWith('*') && part.endsWith('*') && part.length > 2) {
+      return (
+        <em key={`${index}-${part}`} className={styles.textItalic}>
+          {part.slice(1, -1)}
+        </em>
+      )
+    }
+    return <span key={`${index}-${part}`}>{part}</span>
+  })
+}
+
 function TextParagraphs({ text }: { text: string }) {
   return (
     <>
-      {text.split('\n\n').map((paragraph) => (
-        <p key={paragraph} className={styles.textPara}>
-          {paragraph}
-        </p>
-      ))}
+      {text
+        .split(/\n\s*\n/)
+        .map((paragraph) => paragraph.trim())
+        .filter(Boolean)
+        .map((paragraph) => {
+          const italicBlock = paragraph.match(/^\*([\s\S]*)\*$/)
+          if (italicBlock && !italicBlock[1].includes('*')) {
+            const lines = italicBlock[1]
+              .split('\n')
+              .map((line) => line.trim())
+              .filter(Boolean)
+            return (
+              <p key={paragraph} className={`${styles.textPara} ${styles.textItalic}`}>
+                {lines.map((line, index) => (
+                  <span key={line}>
+                    {index > 0 && <br />}
+                    {line}
+                  </span>
+                ))}
+              </p>
+            )
+          }
+
+          return (
+            <p key={paragraph} className={styles.textPara}>
+              {renderRichText(paragraph)}
+            </p>
+          )
+        })}
     </>
   )
 }
@@ -88,6 +126,7 @@ function TextSection({ material }: { material: PlaceMaterial }) {
             <div key={extra.imageUrl} className={styles.extra}>
               <img src={extra.imageUrl} alt="" className={styles.image} />
               {extra.caption && <p className={styles.caption}>{extra.caption}</p>}
+              {extra.caption && extra.captionSource && <div className={styles.divider} />}
               {extra.captionSource && <p className={styles.captionSource}>{extra.captionSource}</p>}
             </div>
           ))}
@@ -110,30 +149,43 @@ function MaterialBlock({ material }: { material: PlaceMaterial }) {
     return (
       <article className={styles.card}>
         <TitleBlock title={material.title} />
+        {material.audioUrl && <AudioPlayer src={material.audioUrl} />}
         <TextSection material={material} />
       </article>
     )
   }
 
+  const historicPhoto = Boolean(material.hideTitle)
   const placeMeta = isPlaceMetaCaption(material.caption, material.captionSource)
   const photoCaption = material.caption && !placeMeta ? material.caption : undefined
   const placeLine = placeMeta ? material.caption : 'Санкт-Петербург, 2026 год'
+  const showPlaceLine = !(photoCaption && material.captionSource)
+  const imageStyle = material.imageObjectPosition
+    ? { objectPosition: material.imageObjectPosition }
+    : undefined
 
   return (
     <article className={styles.card}>
       <div className={styles.imageWrap}>
-        <img src={material.imageUrl} alt="" className={styles.image} />
+        <img src={material.imageUrl} alt="" className={styles.image} style={imageStyle} />
       </div>
       {photoCaption && <p className={styles.caption}>{photoCaption}</p>}
+      {photoCaption && material.captionSource && <div className={styles.divider} />}
       {material.captionSource && <p className={styles.captionSource}>{material.captionSource}</p>}
 
-      <TitleBlock title={material.title} />
+      {!historicPhoto && (
+        <>
+          <TitleBlock title={material.title} />
+          {showPlaceLine && (
+            <>
+              <div className={styles.divider} />
+              <p className={styles.placeLine}>{placeLine}</p>
+            </>
+          )}
+        </>
+      )}
 
-      <div className={styles.divider} />
-
-      <p className={styles.placeLine}>{placeLine}</p>
-
-      <AudioPlayer />
+      {material.audioUrl && <AudioPlayer src={material.audioUrl} />}
 
       <TextSection material={material} />
     </article>

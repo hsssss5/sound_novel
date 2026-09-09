@@ -25,7 +25,7 @@ const synopsisBody = [
 const instructionsBody = [
   'Чтобы открыть полную карту маршрута, нажмите на иконку в правом верхнем углу экрана.',
   'На каждой точке маршрута вас будет ждать фрагмент спектакля, который нужно прослушать.',
-  'На схематичных картах, показывающих маршрут от точки до точки, есть условные обозначения:\n\n🐱 — места, у которых нужно делать остановки;\n\n☁️ — места, у которых не нужно останавливаться, но о которых вы можете послушать истории по пути.',
+  'На схематичных картах, показывающих маршрут от точки до точки, есть условные обозначения:\n\n{{legend-cat}} — места, у которых нужно делать остановки;\n\n{{legend-cloud}} — места, у которых не нужно останавливаться, но о которых вы можете послушать истории по пути.',
   'Для полного погружения в историю Евы и города мы рекомендуем вам пройти маршрут и параллельно прослушать аудиоспектакль целиком.',
   'Приятной прогулки!',
 ].join('\n\n')
@@ -50,7 +50,7 @@ export const tourSteps: TourStep[] = [
     type: 'welcome',
     overlayOpacity: 0.25,
     body: [
-      'Здравствуйте, дорогой слушатель! Перед вами — проект, объединивший в себе два формата: аудиоспектакль и историю по петербургским локациям, с которыми связаны забавные, неожиданные, а местами и по-настоящему страшные городские легенды.',
+      'Здравствуйте, дорогой слушатель! Перед вами — проект, объединивший в себе два формата: аудиоспектакль и экскурсию по петербургским локациям, с которыми связаны забавные, неожиданные, а местами и по-настоящему страшные городские легенды.',
       'Чтобы узнать больше, нажмите «Далее».',
     ].join('\n\n'),
   },
@@ -71,6 +71,7 @@ export const tourSteps: TourStep[] = [
     type: 'checkpoint',
     locationImageUrl: assets.locations.library,
     hasAudio: true,
+    audioUrl: assets.audio['cp-1'],
     body: [
       'Начальная точка — библиотека «Измайловская» (Измайловский, 18).',
       'Прослушайте первый аудиофрагмент, не выходя из библиотеки. После завершения прослушивания нажмите «Далее», чтобы перейти к следующему отрезку маршрута.',
@@ -83,6 +84,7 @@ export const tourSteps: TourStep[] = [
     mapImageUrl: assets.mapSegments['1-2'],
     travelTime: '19 минут',
     hasAudio: true,
+    audioUrl: assets.audio['transit-1-2'],
     body: [
       'Вторая точка — памятник Д. И. Менделееву (Московский пр-т, 19).',
       'Прослушайте аудиофрагмент, выйдя из библиотеки «Измайловская». После завершения прослушивания нажмите «Далее» или «Послушать историю по пути», чтобы узнать о домах, мимо которых вы будете проходить.',
@@ -97,6 +99,7 @@ export const tourSteps: TourStep[] = [
     type: 'checkpoint',
     locationImageUrl: assets.locations.mendeleev,
     hasAudio: true,
+    audioUrl: assets.audio['cp-2'],
     body: checkpointBody('второй точки маршрута — памятника Д. И. Менделееву'),
     location: routePoints[1],
   },
@@ -120,6 +123,7 @@ export const tourSteps: TourStep[] = [
     type: 'checkpoint',
     locationImageUrl: assets.locations.angel,
     hasAudio: true,
+    audioUrl: assets.audio['cp-3'],
     body: checkpointBody('третьей точки маршрута — памятника Петербургскому ангелу'),
     location: routePoints[2],
   },
@@ -129,6 +133,7 @@ export const tourSteps: TourStep[] = [
     mapImageUrl: assets.mapSegments['3-4'],
     travelTime: '9 минут',
     hasAudio: true,
+    audioUrl: assets.audio['transit-3-4'],
     body: [
       'Четвертая точка — памятник Человеку-невидимке (наб. р. Фонтанки, 132).',
       'Прослушайте аудиофрагмент, выйдя из Измайловского сада. После завершения прослушивания нажмите «Далее» или «Послушать историю по пути», чтобы узнать историю о доме Гарновского.',
@@ -143,6 +148,7 @@ export const tourSteps: TourStep[] = [
     type: 'checkpoint',
     locationImageUrl: assets.locations.invisibleMan,
     hasAudio: true,
+    audioUrl: assets.audio['cp-4'],
     body: checkpointBody('четвертой точки маршрута — памятника Человеку-невидимке'),
     location: routePoints[3],
   },
@@ -166,6 +172,7 @@ export const tourSteps: TourStep[] = [
     type: 'checkpoint',
     locationImageUrl: assets.locations.egyptian,
     hasAudio: true,
+    audioUrl: assets.audio['cp-5'],
     body: checkpointBody('пятой точки маршрута — Египетского моста'),
     location: routePoints[4],
   },
@@ -175,6 +182,7 @@ export const tourSteps: TourStep[] = [
     mapImageUrl: assets.mapSegments['5-6'],
     travelTime: '9 минут',
     hasAudio: true,
+    audioUrl: assets.audio['transit-5-6'],
     body: [
       'Шестая точка — Семимостье.',
       'Прослушайте аудиофрагмент, перейдя Египетский мост. После завершения прослушивания нажмите «Далее» или «Послушать историю по пути», чтобы узнать легенду, связанную с Египетским мостом.',
@@ -189,6 +197,7 @@ export const tourSteps: TourStep[] = [
     type: 'checkpoint',
     locationImageUrl: assets.locations.semimostye,
     hasAudio: true,
+    audioUrl: assets.audio['cp-6'],
     body: checkpointBody('шестой точки маршрута — Семимостья'),
     location: routePoints[5],
   },
@@ -199,7 +208,7 @@ export const tourSteps: TourStep[] = [
     travelTime: '3 минуты',
     hasAudio: false,
     body: [
-      'Седьмая точка — Никольский Морской собор.',
+      'Седьмая точка — Никольский Морской собор (Никольская пл., 1/3).',
       'По пути вы можете послушать легенду о Семимостье. Чтобы перейти к следующему аудиофрагменту, нажмите «Далее».',
     ].join('\n\n'),
     secondaryAction: {
@@ -212,6 +221,7 @@ export const tourSteps: TourStep[] = [
     type: 'checkpoint',
     locationImageUrl: assets.locations.navalCathedral,
     hasAudio: true,
+    audioUrl: assets.audio['cp-7'],
     body: checkpointBody('седьмой точки маршрута — Никольского Морского собора'),
     location: routePoints[6],
   },
@@ -221,6 +231,7 @@ export const tourSteps: TourStep[] = [
     mapImageUrl: assets.mapSegments['7-8'],
     travelTime: '10 минут',
     hasAudio: true,
+    audioUrl: assets.audio['transit-7-8'],
     body: [
       'Восьмая точка — Львиный мост.',
       'Прослушайте аудиофрагмент, выйдя из Никольского сада. После завершения прослушивания нажмите «Далее» или «Послушать историю по пути», чтобы узнать легенды, связанные с Никольским Морским собором и… старушками.',
@@ -235,6 +246,7 @@ export const tourSteps: TourStep[] = [
     type: 'checkpoint',
     locationImageUrl: assets.locations.lionBridge,
     hasAudio: true,
+    audioUrl: assets.audio['cp-8'],
     body: checkpointBody(
       'восьмой точки маршрута — Львиного моста',
       'Прослушайте аудиофрагмент, чтобы узнать, куда привел Еву ее новый знакомый. Чтобы перейти к следующему отрезку маршрута, нажмите «Далее».',
@@ -261,6 +273,7 @@ export const tourSteps: TourStep[] = [
     type: 'checkpoint',
     locationImageUrl: assets.locations.srednyaya,
     hasAudio: true,
+    audioUrl: assets.audio['cp-9'],
     body: checkpointBody(
       'девятой точки маршрута — Средней Подьяческой улицы',
       'Прослушайте аудиофрагмент, чтобы узнать, кого еще Ева встретила на своем пути. Чтобы перейти к следующему отрезку маршрута, нажмите «Далее».',
@@ -287,6 +300,7 @@ export const tourSteps: TourStep[] = [
     type: 'checkpoint',
     locationImageUrl: assets.locations.brinko,
     hasAudio: true,
+    audioUrl: assets.audio['cp-10'],
     body: checkpointBody('десятой точки маршрута — переулка Бринько'),
     location: routePoints[9],
   },
@@ -310,6 +324,7 @@ export const tourSteps: TourStep[] = [
     type: 'checkpoint',
     locationImageUrl: assets.locations.hauptwachte,
     hasAudio: true,
+    audioUrl: assets.audio['cp-11'],
     body: [
       'Вы дошли до конечной точки маршрута — Гауптвахты на Сенной.',
       'Прослушайте аудиофрагмент, чтобы узнать, чем же закончились поиски Евы. Нажмите далее, чтобы перейти к завершающему фрагменту.',
@@ -320,6 +335,7 @@ export const tourSteps: TourStep[] = [
     id: 'finale',
     type: 'finale',
     hasAudio: true,
+    audioUrl: assets.audio.finale,
     overlayOpacity: 0.25,
     body: 'Перед вами — последний аудиофрагмент и финал истории! Послушайте, чтобы узнать, чем закончились приключения Евы и ее дедушки.',
   },

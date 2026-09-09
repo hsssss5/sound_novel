@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react'
+import { createPortal } from 'react-dom'
 import type { TourStep } from '../../content/types'
 import { assets } from '../../content/assets'
 import { StepFooter, StepNav } from '../layout/StepFooter'
@@ -32,11 +34,61 @@ function SquarePhoto({ src }: { src: string }) {
   )
 }
 
+function MapLightbox({ src, onClose }: { src: string; onClose: () => void }) {
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        onClose()
+      }
+    }
+    document.addEventListener('keydown', onKey)
+    const prev = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    return () => {
+      document.removeEventListener('keydown', onKey)
+      document.body.style.overflow = prev
+    }
+  }, [onClose])
+
+  return createPortal(
+    <div className={styles.lightbox} role="dialog" aria-modal="true" aria-label="Карта маршрута">
+      <button
+        type="button"
+        className={styles.lightboxBackdrop}
+        aria-label="Закрыть"
+        onClick={onClose}
+      />
+      <div className={styles.lightboxPanel}>
+        <button
+          type="button"
+          className={styles.lightboxClose}
+          aria-label="Закрыть"
+          onClick={onClose}
+        >
+          ×
+        </button>
+        <img src={src} alt="" className={styles.lightboxImage} />
+      </div>
+    </div>,
+    document.body,
+  )
+}
+
 function MapImage({ src }: { src: string }) {
+  const [open, setOpen] = useState(false)
+
   return (
-    <div className={styles.mapWrap}>
-      <img src={src} alt="" className={styles.mapImage} />
-    </div>
+    <>
+      <button
+        type="button"
+        className={styles.mapButton}
+        onClick={() => setOpen(true)}
+        aria-label="Увеличить карту"
+      >
+        <img src={src} alt="" className={styles.mapImage} />
+      </button>
+      {open && <MapLightbox src={src} onClose={() => setOpen(false)} />}
+    </>
   )
 }
 

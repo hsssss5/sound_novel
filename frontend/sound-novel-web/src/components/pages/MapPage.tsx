@@ -1,36 +1,12 @@
-import { get2GisRouteUrl, getYandexMapsRouteUrl, routePoints } from '../../content/mapLinks'
+import { MapRoutePanel } from '../map/MapRoutePanel'
 import styles from './MapPage.module.css'
 
 export function MapPage() {
-  const yandexUrl = getYandexMapsRouteUrl()
-  const gisUrl = get2GisRouteUrl()
-
   return (
     <div className={styles.page}>
       <h1 className={styles.title}>Маршрут</h1>
       <div className={styles.panel}>
-        <ol className={styles.list}>
-          {routePoints.map((point, index) => (
-            <li key={point.title} className={styles.listItem}>
-              <span className={styles.number}>{index + 1}</span>
-              <span className={styles.pointTitle}>{point.title}</span>
-            </li>
-          ))}
-        </ol>
-
-        <div className={styles.actions}>
-          <a href={yandexUrl} target="_blank" rel="noopener noreferrer" className={styles.mapLink}>
-            Открыть в Яндекс.Картах
-          </a>
-          <a
-            href={gisUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={`${styles.mapLink} ${styles.mapLinkSecondary}`}
-          >
-            Открыть в 2ГИС
-          </a>
-        </div>
+        <MapRoutePanel large />
       </div>
     </div>
   )

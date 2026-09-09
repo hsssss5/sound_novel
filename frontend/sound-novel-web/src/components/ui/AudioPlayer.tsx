@@ -5,6 +5,8 @@ import styles from './AudioPlayer.module.css'
 /** Временная заглушка вместо реальных дорожек */
 const TEMP_AUDIO_URL = assetUrl('audio/temp-placeholder.mp3')
 
+const TRACK_INSET_PX = 14
+
 interface AudioPlayerProps {
   src?: string
 }
@@ -61,7 +63,8 @@ export function AudioPlayer({ src }: AudioPlayerProps) {
       return
     }
     const rect = target.getBoundingClientRect()
-    const ratio = Math.min(1, Math.max(0, (clientX - rect.left) / rect.width))
+    const usable = Math.max(1, rect.width - TRACK_INSET_PX * 2)
+    const ratio = Math.min(1, Math.max(0, (clientX - rect.left - TRACK_INSET_PX) / usable))
     audio.currentTime = ratio * audio.duration
     setProgress(ratio)
   }
@@ -73,6 +76,8 @@ export function AudioPlayer({ src }: AudioPlayerProps) {
   const onSeekTouch = (event: TouchEvent<HTMLButtonElement>) => {
     seek(event.touches[0].clientX, event.currentTarget)
   }
+
+  const travel = TRACK_INSET_PX * 2
 
   return (
     <div className={styles.player}>
@@ -90,7 +95,7 @@ export function AudioPlayer({ src }: AudioPlayerProps) {
         <span className={styles.rail} aria-hidden="true" />
         <span
           className={styles.thumb}
-          style={{ left: `calc(10px + ${progress} * (100% - 20px))` }}
+          style={{ left: `calc(${TRACK_INSET_PX}px + ${progress} * (100% - ${travel}px))` }}
         />
       </button>
     </div>
