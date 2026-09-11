@@ -1,6 +1,6 @@
 import {
-  GOOGLE_MY_MAPS_URL,
   MAP_2GIS_OPEN_URL,
+  MAPMAGIC_ROUTE_URL,
   YANDEX_MAP_WIDGET_SRC,
   YANDEX_MAPS_OPEN_URL,
   routePoints,
@@ -43,12 +43,12 @@ export function MapRoutePanel({ large = false }: MapRoutePanelProps) {
           2ГИС
         </a>
         <a
-          href={GOOGLE_MY_MAPS_URL}
+          href={MAPMAGIC_ROUTE_URL}
           target="_blank"
           rel="noopener noreferrer"
           className={styles.openButton}
         >
-          Google
+          MapMagic
         </a>
       </div>
 

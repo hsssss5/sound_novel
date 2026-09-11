@@ -82,33 +82,31 @@
   cursor: default;
 }
 
-.externalLink {
+.iconRow {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+  padding: 8px 0 4px;
+}
+
+.iconLink {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  width: 100%;
-  padding: 12px 0;
-  border: none;
-  background: transparent;
-  text-align: left;
-  font: inherit;
-  font-size: 1rem;
-  color: #242424;
+  justify-content: center;
+  line-height: 0;
   text-decoration: none;
-  cursor: pointer;
 }
 
 .icon {
   display: block;
-  flex-shrink: 0;
-  width: 36px;
-  height: 36px;
+  width: 44px;
+  height: 44px;
   object-fit: contain;
   object-position: center;
 }
 
 .iconMcbs {
-  width: 63px;
-  height: 36px;
+  width: 77px;
+  height: 44px;
 }

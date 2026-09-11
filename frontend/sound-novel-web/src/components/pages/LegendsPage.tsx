@@ -28,6 +28,10 @@ export function LegendsPage() {
           <span className={styles.label}>Сообщение</span>
           <textarea className={styles.textarea} name="message" rows={5} />
         </label>
+        <label className={styles.consent}>
+          <input className={styles.checkbox} type="checkbox" name="consent" required />
+          <span>Я соглашаюсь на обработку моих персональных данных</span>
+        </label>
         <div className={styles.submitWrap}>
           <Button type="submit" variant="primary">
             Отправить

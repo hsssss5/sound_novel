@@ -86,40 +86,40 @@ export function BurgerMenu({
             </button>
           </li>
           <li className={styles.item}>
-            <a
-              className={styles.externalLink}
-              href={externalLinks.mcbs.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={onClose}
-            >
-              <span>{externalLinks.mcbs.label}</span>
-              <img
-                className={`${styles.icon} ${styles.iconMcbs}`}
-                src={assets.iconMcbs}
-                alt=""
-                width={98}
-                height={56}
-              />
-            </a>
-          </li>
-          <li className={styles.item}>
-            <a
-              className={styles.externalLink}
-              href={externalLinks.vk.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={onClose}
-            >
-              <span>{externalLinks.vk.label}</span>
-              <img
-                className={styles.icon}
-                src={assets.iconVk}
-                alt=""
-                width={56}
-                height={56}
-              />
-            </a>
+            <div className={styles.iconRow}>
+              <a
+                className={styles.iconLink}
+                href={externalLinks.mcbs.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={externalLinks.mcbs.label}
+                onClick={onClose}
+              >
+                <img
+                  className={`${styles.icon} ${styles.iconMcbs}`}
+                  src={assets.iconMcbs}
+                  alt={externalLinks.mcbs.label}
+                  width={98}
+                  height={56}
+                />
+              </a>
+              <a
+                className={styles.iconLink}
+                href={externalLinks.vk.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={externalLinks.vk.label}
+                onClick={onClose}
+              >
+                <img
+                  className={styles.icon}
+                  src={assets.iconVk}
+                  alt={externalLinks.vk.label}
+                  width={56}
+                  height={56}
+                />
+              </a>
+            </div>
           </li>
         </ul>
       </nav>

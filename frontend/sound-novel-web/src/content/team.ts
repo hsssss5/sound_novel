@@ -12,11 +12,13 @@ export const castMembers: CreditPerson[] = [
   },
   {
     id: 'author',
+    photoUrl: credit('nikolay-schlippenbach.jpg'),
     role: 'Автор',
     name: 'Николай фон Шлиппенбах',
   },
   {
     id: 'gleb-angel',
+    photoUrl: credit('konstantin-fedorov.jpg'),
     role: 'Глеб Егорович, Петербургский ангел',
     name: 'Константин Фёдоров-Фрейвальд',
   },
@@ -58,6 +60,7 @@ export const castMembers: CreditPerson[] = [
   },
   {
     id: 'cat',
+    photoUrl: credit('anastasia-zaramenskaya-cat.jpg'),
     role: 'Кошка, которая гуляет сама по себе',
     name: 'Анастасия Зараменская',
   },
@@ -69,6 +72,7 @@ export const castMembers: CreditPerson[] = [
   },
   {
     id: 'sound',
+    photoUrl: credit('andrey-lobanov.jpg'),
     role: 'Звукорежиссер',
     name: 'Андрей Лобанов',
   },
@@ -95,11 +99,13 @@ export const teamMembers: CreditPerson[] = [
   },
   {
     id: 'coauthor-zaramenskaya',
+    photoUrl: credit('anastasia-zaramenskaya.jpg'),
     role: 'Соавтор',
     name: 'Анастасия Зараменская',
   },
   {
     id: 'local-historian-loginova',
+    photoUrl: credit('anna-loginova.jpg'),
     role: 'Краевед',
     name: 'Анна Логинова',
   },
