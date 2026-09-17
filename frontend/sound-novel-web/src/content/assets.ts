@@ -26,6 +26,18 @@ export const assets = {
     'cp-11': assetUrl('audio/part-15-cp-11-hauptwachte.mp3'),
     finale: assetUrl('audio/part-16-finale.mp3'),
   },
+  placeAudio: {
+    pomeshchik: assetUrl('audio/cards/card-01-pomeshchik.mp3'),
+    mendeleev: assetUrl('audio/cards/card-02-mendeleev.mp3'),
+    garnovsky: assetUrl('audio/cards/card-03-garnovsky.mp3'),
+    invisible_man: assetUrl('audio/cards/card-04-invisible.mp3'),
+    egyptian_bridge: assetUrl('audio/cards/card-05-egyptian.mp3'),
+    semimostye: assetUrl('audio/cards/card-06-semimostye.mp3'),
+    naval_cathedral: assetUrl('audio/cards/card-07-naval-cathedral.mp3'),
+    litovsky_castle: assetUrl('audio/cards/card-08-litovsky.mp3'),
+    srednyaya_podyacheskaya: assetUrl('audio/cards/card-09-srednyaya.mp3'),
+    brinko: assetUrl('audio/cards/card-10-senna-brinko.mp3'),
+  },
   mapSegments: {
     '1-2': assetUrl('assets/maps/map-1-2.png'),
     '2-3': assetUrl('assets/maps/map-2-3.png'),

@@ -13,7 +13,7 @@ export const castMembers: CreditPerson[] = [
   {
     id: 'author',
     photoUrl: credit('nikolay-schlippenbach.jpg'),
-    role: 'Автор',
+    role: 'Рассказчик',
     name: 'Николай фон Шлиппенбах',
   },
   {

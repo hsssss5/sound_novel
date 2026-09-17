@@ -61,13 +61,18 @@ export function BurgerMenu({
             </button>
           </li>
           <li className={styles.item}>
+            <button type="button" className={styles.link} onClick={() => handle(onOpenMap)}>
+              Карта
+            </button>
+          </li>
+          <li className={styles.item}>
             <button type="button" className={styles.link} onClick={() => handle(onOpenDossier)}>
               Досье персонажей
             </button>
           </li>
           <li className={styles.item}>
-            <button type="button" className={styles.link} onClick={() => handle(onOpenAbout)}>
-              О проекте
+            <button type="button" className={styles.link} onClick={() => handle(onOpenFeedback)}>
+              Обратная связь
             </button>
           </li>
           <li className={styles.item}>
@@ -76,13 +81,8 @@ export function BurgerMenu({
             </button>
           </li>
           <li className={styles.item}>
-            <button type="button" className={styles.link} onClick={() => handle(onOpenMap)}>
-              Карта
-            </button>
-          </li>
-          <li className={styles.item}>
-            <button type="button" className={styles.link} onClick={() => handle(onOpenFeedback)}>
-              Обратная связь
+            <button type="button" className={styles.link} onClick={() => handle(onOpenAbout)}>
+              О проекте
             </button>
           </li>
           <li className={styles.item}>
