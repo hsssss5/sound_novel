@@ -302,7 +302,7 @@ export const tourSteps: TourStep[] = [
     ].join('\n\n'),
     secondaryAction: {
       label: listenHistoryAction.label,
-      materialIds: ['srednyaya_podyacheskaya', 'griboedov_embankment'],
+      materialIds: ['srednyaya_podyacheskaya', 'rimsky_korsakov_3', 'griboedov_embankment'],
     },
   },
   {

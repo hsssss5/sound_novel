@@ -19,6 +19,7 @@ export interface PlaceMaterial {
   hideTitle?: boolean
   imageObjectPosition?: string
   extraImages?: Array<{
+    id?: string
     imageUrl: string
     caption?: string
     captionSource?: string

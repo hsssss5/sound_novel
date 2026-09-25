@@ -60,7 +60,30 @@ function renderRichText(paragraph: string) {
   })
 }
 
-function TextParagraphs({ text }: { text: string }) {
+function ExtraImageBlock({
+  extra,
+}: {
+  extra: NonNullable<PlaceMaterial['extraImages']>[number]
+}) {
+  return (
+    <div className={styles.extra}>
+      <img src={extra.imageUrl} alt="" className={styles.image} />
+      {extra.caption && <p className={styles.caption}>{extra.caption}</p>}
+      {extra.caption && extra.captionSource && <div className={styles.divider} />}
+      {extra.captionSource && <p className={styles.captionSource}>{extra.captionSource}</p>}
+    </div>
+  )
+}
+
+function TextParagraphs({
+  text,
+  extras = [],
+}: {
+  text: string
+  extras?: NonNullable<PlaceMaterial['extraImages']>
+}) {
+  const extrasById = new Map(extras.filter((extra) => extra.id).map((extra) => [extra.id!, extra]))
+
   return (
     <>
       {text
@@ -68,6 +91,15 @@ function TextParagraphs({ text }: { text: string }) {
         .map((paragraph) => paragraph.trim())
         .filter(Boolean)
         .map((paragraph) => {
+          const imageMatch = paragraph.match(/^\{\{image:([^}]+)\}\}$/)
+          if (imageMatch) {
+            const extra = extrasById.get(imageMatch[1])
+            if (!extra) {
+              return null
+            }
+            return <ExtraImageBlock key={`image-${imageMatch[1]}`} extra={extra} />
+          }
+
           const italicBlock = paragraph.match(/^\*([\s\S]*)\*$/)
           if (italicBlock && !italicBlock[1].includes('*')) {
             const lines = italicBlock[1]
@@ -99,10 +131,16 @@ function TextParagraphs({ text }: { text: string }) {
 function TextSection({ material }: { material: PlaceMaterial }) {
   const [textOpen, setTextOpen] = useState(false)
   const hasText = Boolean(material.text || material.dates)
-  const hasExtras = Boolean(material.extraImages?.length)
+  const extras = material.extraImages ?? []
+  const hasExtras = extras.length > 0
   if (!hasText && !hasExtras) {
     return null
   }
+
+  const referencedIds = new Set(
+    [...(material.text?.matchAll(/\{\{image:([^}]+)\}\}/g) ?? [])].map((match) => match[1]),
+  )
+  const trailingExtras = extras.filter((extra) => !extra.id || !referencedIds.has(extra.id))
 
   return (
     <>
@@ -121,14 +159,9 @@ function TextSection({ material }: { material: PlaceMaterial }) {
               ))}
             </p>
           )}
-          {material.text && <TextParagraphs text={material.text} />}
-          {material.extraImages?.map((extra) => (
-            <div key={extra.imageUrl} className={styles.extra}>
-              <img src={extra.imageUrl} alt="" className={styles.image} />
-              {extra.caption && <p className={styles.caption}>{extra.caption}</p>}
-              {extra.caption && extra.captionSource && <div className={styles.divider} />}
-              {extra.captionSource && <p className={styles.captionSource}>{extra.captionSource}</p>}
-            </div>
+          {material.text && <TextParagraphs text={material.text} extras={extras} />}
+          {trailingExtras.map((extra) => (
+            <ExtraImageBlock key={extra.id ?? extra.imageUrl} extra={extra} />
           ))}
         </div>
       )}

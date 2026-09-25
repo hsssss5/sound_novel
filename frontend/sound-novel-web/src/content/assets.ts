@@ -87,5 +87,6 @@ export const assets = {
     ribopyer: assetUrl('assets/photos/ribopyer.png'),
     spbgasuTree: assetUrl('assets/photos/spbgasu-tree.jpg'),
     konstantinovsky: assetUrl('assets/photos/konstantinovsky.jpg'),
+    dostoevskayaAnna: assetUrl('assets/photos/dostoevskaya-anna.jpg'),
   },
 } as const
