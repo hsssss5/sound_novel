@@ -77,22 +77,24 @@ export function CompletePage({ body }: { body: string }) {
 
   return (
     <div className={styles.page}>
-      <div className={`${styles.content} ${styles.completeContent}`}>
-        <div className={styles.completeText}>
-          {paragraphs.map((paragraph) => (
-            <p key={paragraph} className={styles.body}>
-              {paragraph}
-            </p>
-          ))}
-        </div>
-        <div className={styles.completeCta}>
-          <Button
-            variant="primary"
-            fullWidth={false}
-            onClick={() => window.open(yandexForms.feedback, '_blank', 'noopener,noreferrer')}
-          >
-            Оставить отзыв
-          </Button>
+      <div className={styles.content}>
+        <div className={`${styles.stack} ${styles.completeStack}`}>
+          <div className={styles.completeText}>
+            {paragraphs.map((paragraph) => (
+              <p key={paragraph} className={styles.body}>
+                {paragraph}
+              </p>
+            ))}
+          </div>
+          <div className={styles.completeCta}>
+            <Button
+              variant="primary"
+              fullWidth={false}
+              onClick={() => window.open(yandexForms.feedback, '_blank', 'noopener,noreferrer')}
+            >
+              Оставить отзыв
+            </Button>
+          </div>
         </div>
       </div>
     </div>
@@ -105,11 +107,13 @@ function TextStepPage({ body, primaryLabel, onNext, onBack }: TextStepPageProps)
   return (
     <div className={styles.page}>
       <div className={styles.content}>
-        {paragraphs.map((paragraph) => (
-          <p key={paragraph} className={styles.body}>
-            {renderParagraph(paragraph)}
-          </p>
-        ))}
+        <div className={styles.stack}>
+          {paragraphs.map((paragraph) => (
+            <p key={paragraph} className={styles.body}>
+              {renderParagraph(paragraph)}
+            </p>
+          ))}
+        </div>
       </div>
       <StepFooter>
         <StepNav>
