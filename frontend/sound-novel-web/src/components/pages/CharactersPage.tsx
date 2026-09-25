@@ -1,11 +1,18 @@
 import { useEffect, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { characterRows, charactersById } from '../../content/characters'
+import { useHeaderChrome } from '../layout/HeaderChromeContext'
 import styles from './CharactersPage.module.css'
 
 export function CharactersPage() {
+  const { setShowBrandLogo } = useHeaderChrome()
   const [activeId, setActiveId] = useState<string | null>(null)
   const active = activeId ? charactersById[activeId] : null
+
+  useEffect(() => {
+    setShowBrandLogo(true)
+    return () => setShowBrandLogo(false)
+  }, [setShowBrandLogo])
 
   useEffect(() => {
     if (!active) {

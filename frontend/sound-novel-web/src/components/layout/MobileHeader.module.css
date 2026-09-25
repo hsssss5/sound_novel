@@ -1,6 +1,6 @@
 .header {
   display: grid;
-  grid-template-columns: 40px 1fr 40px;
+  grid-template-columns: 40px 1fr 56px;
   align-items: center;
   gap: 8px;
   padding: 8px 16px;
@@ -21,8 +21,20 @@
   min-width: 0;
 }
 
-.iconBtn,
 .logoMark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: #f5f5f5;
+  flex-shrink: 0;
+}
+
+.iconBtn {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -33,9 +45,6 @@
   background: transparent;
   color: #f5f5f5;
   flex-shrink: 0;
-}
-
-.iconBtn {
   cursor: pointer;
 }
 
@@ -45,7 +54,7 @@
 
 .headerLogo {
   display: block;
-  width: 40px;
-  height: 40px;
+  width: 52px;
+  height: 52px;
   object-fit: contain;
 }

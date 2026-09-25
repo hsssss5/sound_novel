@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react'
-import { useNavigate } from 'react-router-dom'
 import { assets } from '../../content/assets'
+import { yandexForms } from '../../content/feedback'
 import { Button } from '../ui/Button'
 import { StepFooter, StepNav } from '../layout/StepFooter'
 import styles from './TextStepPage.module.css'
@@ -73,7 +73,6 @@ export function InstructionPage({
 }
 
 export function CompletePage({ body }: { body: string }) {
-  const navigate = useNavigate()
   const paragraphs = body.split('\n\n')
 
   return (
@@ -90,7 +89,7 @@ export function CompletePage({ body }: { body: string }) {
           <Button
             variant="primary"
             fullWidth={false}
-            onClick={() => navigate('/feedback')}
+            onClick={() => window.open(yandexForms.feedback, '_blank', 'noopener,noreferrer')}
           >
             Оставить отзыв
           </Button>

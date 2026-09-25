@@ -28,6 +28,7 @@ export const assets = {
   },
   placeAudio: {
     pomeshchik: assetUrl('audio/cards/card-01-pomeshchik.mp3'),
+    labzin: assetUrl('audio/cards/card-labzin.mp3'),
     mendeleev: assetUrl('audio/cards/card-02-mendeleev.mp3'),
     garnovsky: assetUrl('audio/cards/card-03-garnovsky.mp3'),
     invisible_man: assetUrl('audio/cards/card-04-invisible.mp3'),
@@ -79,5 +80,12 @@ export const assets = {
     srednyaya: assetUrl('assets/photos/srednyaya-card.jpg'),
     sennaMarket: assetUrl('assets/photos/senna-market.jpg'),
     sennaView: assetUrl('assets/photos/senna-view.jpg'),
+    sinyagin: assetUrl('assets/photos/sinyagin.jpg'),
+    dostoevskyPortrait: assetUrl('assets/photos/dostoevsky-portrait.jpg'),
+    cheltsov: assetUrl('assets/photos/cheltsov.jpg'),
+    cheltsovPlaque: assetUrl('assets/photos/cheltsov-plaque.jpg'),
+    ribopyer: assetUrl('assets/photos/ribopyer.png'),
+    spbgasuTree: assetUrl('assets/photos/spbgasu-tree.jpg'),
+    konstantinovsky: assetUrl('assets/photos/konstantinovsky.jpg'),
   },
 } as const

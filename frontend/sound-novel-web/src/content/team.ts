@@ -110,11 +110,6 @@ export const teamMembers: CreditPerson[] = [
     name: 'Анна Логинова',
   },
   {
-    id: 'local-historian-urusova',
-    role: 'Краевед',
-    name: 'Галина Урусова',
-  },
-  {
     id: 'programmer',
     role: 'Программист',
     name: 'Максим Полудницин',

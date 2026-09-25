@@ -18,7 +18,7 @@
 .title {
   margin: 0;
   font-family: 'IBM Plex Sans', system-ui, sans-serif;
-  font-weight: 400;
+  font-weight: 700;
   font-size: 1.375rem;
   line-height: 1.3;
   color: #f5f5f5;
@@ -40,66 +40,8 @@
   color: #f5f5f5;
 }
 
-.panel {
+.cta {
   display: flex;
-  flex-direction: column;
-  gap: 16px;
-  padding: 16px;
-  border-radius: 16px;
-  background: rgba(245, 245, 245, 0.94);
-}
-
-.field {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.label {
-  font-family: 'IBM Plex Sans', system-ui, sans-serif;
-  font-weight: 400;
-  font-size: 0.875rem;
-  color: #242424;
-}
-
-.input,
-.textarea {
-  width: 100%;
-  padding: 10px 12px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  font-family: 'IBM Plex Sans', system-ui, sans-serif;
-  font-weight: 400;
-  font-size: 1rem;
-  color: #242424;
-  background: #fff;
-}
-
-.textarea {
-  resize: vertical;
-  min-height: 120px;
-}
-
-.consent {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  font-family: 'IBM Plex Sans', system-ui, sans-serif;
-  font-weight: 400;
-  font-size: 0.875rem;
-  line-height: 1.35;
-  color: #242424;
-  cursor: pointer;
-}
-
-.checkbox {
-  flex-shrink: 0;
-  width: 18px;
-  height: 18px;
-  margin-top: 1px;
-  accent-color: #242424;
-}
-
-.submitWrap {
-  margin-top: 4px;
+  justify-content: center;
+  margin-top: 8px;
 }

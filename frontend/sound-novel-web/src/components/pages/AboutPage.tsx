@@ -1,10 +1,12 @@
+import { useEffect } from 'react'
 import { aboutIntro } from '../../content/about'
 import { castMembers, teamMembers } from '../../content/team'
 import type { CreditPerson } from '../../content/types'
+import { useHeaderChrome } from '../layout/HeaderChromeContext'
 import styles from './AboutPage.module.css'
 
 const CAST_ROW_SIZES = [3, 3, 3, 1, 2] as const
-const TEAM_ROW_SIZES = [3, 3, 1] as const
+const TEAM_ROW_SIZES = [3, 3] as const
 
 function chunkBySizes<T>(items: T[], sizes: readonly number[]): T[][] {
   const rows: T[][] = []
@@ -20,8 +22,14 @@ function chunkBySizes<T>(items: T[], sizes: readonly number[]): T[][] {
 }
 
 export function AboutPage() {
+  const { setShowBrandLogo } = useHeaderChrome()
   const castRows = chunkBySizes(castMembers, CAST_ROW_SIZES)
   const teamRows = chunkBySizes(teamMembers, TEAM_ROW_SIZES)
+
+  useEffect(() => {
+    setShowBrandLogo(true)
+    return () => setShowBrandLogo(false)
+  }, [setShowBrandLogo])
 
   return (
     <div className={styles.page}>

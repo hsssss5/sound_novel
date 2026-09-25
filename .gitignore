@@ -1,6 +1,7 @@
 # Build
 frontend/**/dist/
 frontend/**/node_modules/
+frontend/**/tools/
 
 # IDE
 .vs/
