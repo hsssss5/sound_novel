@@ -3,6 +3,7 @@ import { AppLayout } from './components/AppLayout'
 import { AboutPage } from './components/pages/AboutPage'
 import { CharactersPage } from './components/pages/CharactersPage'
 import { CompleteTourPage } from './components/pages/CompleteTourPage'
+import { DevPage } from './components/pages/DevPage'
 import { FeedbackPage } from './components/pages/FeedbackPage'
 import { LegendsPage } from './components/pages/LegendsPage'
 import { MapPage } from './components/pages/MapPage'
@@ -23,6 +24,7 @@ function App() {
           <Route path="map" element={<MapPage />} />
           <Route path="complete" element={<CompleteTourPage />} />
           <Route path="feedback" element={<FeedbackPage />} />
+          <Route path="dev" element={<DevPage />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Route>
       </Routes>
