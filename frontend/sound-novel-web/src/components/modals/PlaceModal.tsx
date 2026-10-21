@@ -14,12 +14,13 @@ function isPlaceMetaCaption(caption?: string, captionSource?: string) {
   if (!caption || captionSource) {
     return false
   }
-  return /^Санкт-Петербург/i.test(caption) || /^Фотография\b/i.test(caption)
+  // без \b — в JS граница слова не работает с кириллицей
+  return /^Санкт-Петербург/i.test(caption) || /^Фотография/i.test(caption)
 }
 
 /** «Санкт-Петербург, …» в captionSource — это placeLine под заголовком, не подпись под фото */
 function isPlaceYearSource(captionSource?: string) {
-  return Boolean(captionSource && /^Санкт-Петербург\b/i.test(captionSource.trim()))
+  return Boolean(captionSource && /^Санкт-Петербург/i.test(captionSource.trim()))
 }
 
 function splitTitle(title: string) {
