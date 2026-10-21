@@ -81,14 +81,13 @@
 .captionSource {
   margin: 0;
   width: 100%;
-  font-family: 'IBM Plex Sans', Georgia, serif;
+  font-family: inherit;
   font-weight: 400;
-  font-size: 0.8125rem;
-  font-style: italic;
-  font-synthesis: style;
+  font-size: 0.875rem;
+  font-style: normal;
   line-height: 1.4;
   text-align: center;
-  color: rgba(36, 36, 36, 0.72);
+  color: rgba(36, 36, 36, 0.55);
 }
 
 .textToggle {
@@ -161,9 +160,10 @@
 
 .textItalic,
 em.textItalic {
-  font-family: 'IBM Plex Sans', Georgia, serif;
+  font-family: 'Circe Slab B', 'Circe Slab C', Georgia, serif;
   font-style: italic;
-  font-synthesis: style;
+  font-synthesis: none;
+  font-weight: 400;
 }
 
 .extra {

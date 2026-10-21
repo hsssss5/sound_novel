@@ -14,7 +14,12 @@ function isPlaceMetaCaption(caption?: string, captionSource?: string) {
   if (!caption || captionSource) {
     return false
   }
-  return /^Санкт-Петербург/i.test(caption)
+  return /^Санкт-Петербург/i.test(caption) || /^Фотография\b/i.test(caption)
+}
+
+/** «Санкт-Петербург, …» в captionSource — это placeLine под заголовком, не подпись под фото */
+function isPlaceYearSource(captionSource?: string) {
+  return Boolean(captionSource && /^Санкт-Петербург\b/i.test(captionSource.trim()))
 }
 
 function splitTitle(title: string) {
@@ -65,12 +70,17 @@ function ExtraImageBlock({
 }: {
   extra: NonNullable<PlaceMaterial['extraImages']>[number]
 }) {
+  const placeYear = isPlaceYearSource(extra.captionSource)
+  const attribution = extra.captionSource && !placeYear ? extra.captionSource : undefined
+  const yearLine = placeYear ? extra.captionSource : undefined
+
   return (
     <div className={styles.extra}>
       <img src={extra.imageUrl} alt="" className={styles.image} />
       {extra.caption && <p className={styles.caption}>{extra.caption}</p>}
-      {extra.caption && extra.captionSource && <div className={styles.divider} />}
-      {extra.captionSource && <p className={styles.captionSource}>{extra.captionSource}</p>}
+      {extra.caption && (attribution || yearLine) && <div className={styles.divider} />}
+      {attribution && <p className={styles.captionSource}>{attribution}</p>}
+      {yearLine && <p className={styles.placeLine}>{yearLine}</p>}
     </div>
   )
 }
@@ -190,9 +200,16 @@ function MaterialBlock({ material }: { material: PlaceMaterial }) {
 
   const historicPhoto = Boolean(material.hideTitle)
   const placeMeta = isPlaceMetaCaption(material.caption, material.captionSource)
+  const placeYearFromSource = isPlaceYearSource(material.captionSource)
   const photoCaption = material.caption && !placeMeta ? material.caption : undefined
-  const placeLine = placeMeta ? material.caption : 'Санкт-Петербург, 2026 год'
-  const showPlaceLine = !(photoCaption && material.captionSource)
+  const attributionSource =
+    material.captionSource && !placeYearFromSource ? material.captionSource : undefined
+  const placeLine = placeMeta
+    ? material.caption!
+    : placeYearFromSource
+      ? material.captionSource!
+      : 'Санкт-Петербург, 2026 год'
+  const showPlaceLine = !(photoCaption && attributionSource)
   const imageStyle = material.imageObjectPosition
     ? { objectPosition: material.imageObjectPosition }
     : undefined
@@ -203,8 +220,8 @@ function MaterialBlock({ material }: { material: PlaceMaterial }) {
         <img src={material.imageUrl} alt="" className={styles.image} style={imageStyle} />
       </div>
       {photoCaption && <p className={styles.caption}>{photoCaption}</p>}
-      {photoCaption && material.captionSource && <div className={styles.divider} />}
-      {material.captionSource && <p className={styles.captionSource}>{material.captionSource}</p>}
+      {photoCaption && attributionSource && <div className={styles.divider} />}
+      {attributionSource && <p className={styles.captionSource}>{attributionSource}</p>}
 
       {!historicPhoto && (
         <>

@@ -53,3 +53,20 @@
   font-style: normal;
   font-display: swap;
 }
+
+/* Circe Italic — отдельный файл (не Slab); подключаем как italic-начертание семейства */
+@font-face {
+  font-family: 'Circe Slab C';
+  src: url('Circe_Italic.otf') format('opentype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Circe Slab B';
+  src: url('Circe_Italic.otf') format('opentype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}

@@ -111,6 +111,7 @@ export const teamMembers: CreditPerson[] = [
   },
   {
     id: 'programmer',
+    photoUrl: credit('maxim-poludnitsin.jpg'),
     role: 'Программист',
     name: 'Максим Полудницин',
   },
