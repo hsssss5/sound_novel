@@ -88,5 +88,9 @@ export const assets = {
     spbgasuTree: assetUrl('assets/photos/spbgasu-tree.jpg'),
     konstantinovsky: assetUrl('assets/photos/konstantinovsky.jpg'),
     dostoevskayaAnna: assetUrl('assets/photos/dostoevskaya-anna.jpg'),
+    derzhavin: assetUrl('assets/photos/derzhavin.jpg'),
+    vegeHouse: assetUrl('assets/photos/vege-house.jpg'),
+    landrin: assetUrl('assets/photos/landrin.jpg'),
+    yusupovGarden: assetUrl('assets/photos/yusupov-garden.jpg'),
   },
 } as const

@@ -34,7 +34,7 @@
 }
 
 .openButton {
-  flex: 1 1 calc(33.333% - 8px);
+  flex: 1 1 calc(50% - 8px);
   min-width: 96px;
   min-height: 44px;
   display: flex;
@@ -53,6 +53,19 @@
 
 .openButton:active {
   opacity: 0.85;
+}
+
+.openButton:disabled {
+  opacity: 0.65;
+  cursor: wait;
+}
+
+.geoError {
+  margin: 0;
+  font-size: 0.8125rem;
+  line-height: 1.35;
+  color: #242424;
+  opacity: 0.75;
 }
 
 .list {
@@ -99,4 +112,5 @@
 .pointTitle {
   color: #242424;
   padding-top: 2px;
+  font-weight: 700;
 }

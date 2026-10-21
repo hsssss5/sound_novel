@@ -81,10 +81,11 @@
 .captionSource {
   margin: 0;
   width: 100%;
-  font-family: inherit;
+  font-family: 'IBM Plex Sans', Georgia, serif;
   font-weight: 400;
   font-size: 0.8125rem;
   font-style: italic;
+  font-synthesis: style;
   line-height: 1.4;
   text-align: center;
   color: rgba(36, 36, 36, 0.72);
@@ -158,12 +159,11 @@
   color: #242424;
 }
 
-.textItalic {
-  font-style: italic;
-}
-
+.textItalic,
 em.textItalic {
+  font-family: 'IBM Plex Sans', Georgia, serif;
   font-style: italic;
+  font-synthesis: style;
 }
 
 .extra {

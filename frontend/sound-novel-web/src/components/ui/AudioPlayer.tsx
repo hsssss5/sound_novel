@@ -1,13 +1,24 @@
 import { useEffect, useRef, useState, type MouseEvent, type TouchEvent } from 'react'
 import { assetUrl } from '../../lib/assetUrl'
+import {
+  loadPlaybackRateIndex,
+  PLAYBACK_RATES,
+  savePlaybackRateIndex,
+} from '../../lib/playbackRate'
+import {
+  ensureSharedTourSrc,
+  getSharedTourAudio,
+  getSharedTourSrc,
+} from '../../lib/sharedTourAudio'
 import styles from './AudioPlayer.module.css'
 
 const TEMP_AUDIO_URL = assetUrl('audio/temp-placeholder.mp3')
 const TRACK_INSET_PX = 14
-const PLAYBACK_RATES = [1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2] as const
 
 interface AudioPlayerProps {
   src?: string
+  persist?: boolean
+  preload?: 'none' | 'metadata'
 }
 
 function formatTime(seconds: number) {
@@ -20,61 +31,110 @@ function formatTime(seconds: number) {
   return `${m}:${s.toString().padStart(2, '0')}`
 }
 
-export function AudioPlayer({ src }: AudioPlayerProps) {
-  const audioRef = useRef<HTMLAudioElement>(null)
+export function AudioPlayer({ src, persist = false, preload = 'metadata' }: AudioPlayerProps) {
+  const localAudioRef = useRef<HTMLAudioElement>(null)
   const [playing, setPlaying] = useState(false)
   const [progress, setProgress] = useState(0)
   const [currentTime, setCurrentTime] = useState(0)
   const [duration, setDuration] = useState(0)
-  const [rateIndex, setRateIndex] = useState(0)
+  const [rateIndex, setRateIndex] = useState(loadPlaybackRateIndex)
 
   const audioSrc = src || TEMP_AUDIO_URL
   const playbackRate = PLAYBACK_RATES[rateIndex]
 
+  const getAudio = () => (persist ? getSharedTourAudio() : localAudioRef.current)
+
+  const ownsSharedTrack = () => !persist || getSharedTourSrc() === audioSrc
+
   useEffect(() => {
-    const audio = audioRef.current
+    const audio = getAudio()
     if (!audio) {
       return
     }
 
+    if (persist) {
+      ensureSharedTourSrc(audioSrc, false)
+    }
+
     const sync = () => {
+      if (persist && getSharedTourSrc() !== audioSrc) {
+        setPlaying(false)
+        setProgress(0)
+        setCurrentTime(0)
+        setDuration(0)
+        return
+      }
       if (!audio.duration) {
         return
       }
       setDuration(audio.duration)
       setCurrentTime(audio.currentTime)
       setProgress(audio.currentTime / audio.duration)
+      setPlaying(!audio.paused)
+    }
+    const onPlay = () => {
+      if (!persist || getSharedTourSrc() === audioSrc) {
+        setPlaying(true)
+      }
+    }
+    const onPause = () => {
+      if (!persist || getSharedTourSrc() === audioSrc) {
+        setPlaying(false)
+      }
     }
     const onEnded = () => {
-      setPlaying(false)
-      setProgress(0)
-      setCurrentTime(0)
+      if (!persist || getSharedTourSrc() === audioSrc) {
+        setPlaying(false)
+        setProgress(0)
+        setCurrentTime(0)
+      }
     }
 
     audio.addEventListener('timeupdate', sync)
     audio.addEventListener('loadedmetadata', sync)
     audio.addEventListener('durationchange', sync)
+    audio.addEventListener('play', onPlay)
+    audio.addEventListener('pause', onPause)
     audio.addEventListener('ended', onEnded)
+    sync()
+
     return () => {
       audio.removeEventListener('timeupdate', sync)
       audio.removeEventListener('loadedmetadata', sync)
       audio.removeEventListener('durationchange', sync)
+      audio.removeEventListener('play', onPlay)
+      audio.removeEventListener('pause', onPause)
       audio.removeEventListener('ended', onEnded)
     }
-  }, [audioSrc])
+  }, [audioSrc, persist])
 
   useEffect(() => {
-    const audio = audioRef.current
-    if (audio) {
+    const audio = getAudio()
+    if (audio && ownsSharedTrack()) {
       audio.playbackRate = playbackRate
     }
-  }, [playbackRate, audioSrc])
+  }, [playbackRate, audioSrc, persist])
 
   const toggle = async () => {
-    const audio = audioRef.current
+    const audio = getAudio()
     if (!audio) {
       return
     }
+
+    if (persist) {
+      const sameTrack = getSharedTourSrc() === audioSrc
+      if (!sameTrack || audio.paused) {
+        ensureSharedTourSrc(audioSrc, true)
+        audio.playbackRate = playbackRate
+        await audio.play()
+        setPlaying(true)
+        return
+      }
+      audio.pause()
+      setPlaying(false)
+      return
+    }
+
     if (audio.paused) {
       await audio.play()
       setPlaying(true)
@@ -85,12 +145,23 @@ export function AudioPlayer({ src }: AudioPlayerProps) {
   }
 
   const cycleRate = () => {
-    setRateIndex((i) => (i + 1) % PLAYBACK_RATES.length)
+    setRateIndex((i) => {
+      const next = (i + 1) % PLAYBACK_RATES.length
+      savePlaybackRateIndex(next)
+      const audio = getAudio()
+      if (audio && (!persist || getSharedTourSrc() === audioSrc)) {
+        audio.playbackRate = PLAYBACK_RATES[next]
+      }
+      return next
+    })
   }
 
   const seek = (clientX: number, target: HTMLElement) => {
-    const audio = audioRef.current
+    const audio = getAudio()
     if (!audio || !audio.duration) {
+      return
+    }
+    if (persist && getSharedTourSrc() !== audioSrc) {
       return
     }
     const rect = target.getBoundingClientRect()
@@ -114,7 +185,9 @@ export function AudioPlayer({ src }: AudioPlayerProps) {
 
   return (
     <div className={styles.player}>
-      <audio ref={audioRef} src={audioSrc} preload="metadata" playsInline />
+      {!persist && (
+        <audio ref={localAudioRef} src={audioSrc} preload={preload} playsInline />
+      )}
       <button type="button" className={styles.playBtn} onClick={toggle} aria-label={playing ? 'Пауза' : 'Слушать'}>
         {playing ? <PauseIcon /> : <PlayIcon />}
       </button>

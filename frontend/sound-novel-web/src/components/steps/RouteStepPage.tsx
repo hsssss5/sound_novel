@@ -122,7 +122,7 @@ export function CheckpointStep({ step, onNext, onBack, onSecondary }: RouteStepP
       <div className={styles.content}>
         {step.locationImageUrl && <SquarePhoto src={step.locationImageUrl} />}
         {step.body && <BodyText body={step.body} />}
-        {showPlayer && <AudioPlayer src={step.audioUrl} />}
+        {showPlayer && <AudioPlayer src={step.audioUrl} persist />}
       </div>
       <StepActions step={step} onNext={onNext} onBack={onBack} onSecondary={onSecondary} />
     </div>
@@ -138,7 +138,7 @@ export function TransitStep({ step, onNext, onBack, onSecondary }: RouteStepPage
         {step.mapImageUrl && <MapImage src={step.mapImageUrl} />}
         {step.travelTime && <p className={styles.travelTime}>Время в пути — {step.travelTime}.</p>}
         {step.body && <BodyText body={step.body} />}
-        {showPlayer && <AudioPlayer src={step.audioUrl} />}
+        {showPlayer && <AudioPlayer src={step.audioUrl} persist />}
       </div>
       <StepActions step={step} onNext={onNext} onBack={onBack} onSecondary={onSecondary} />
     </div>
@@ -152,7 +152,7 @@ export function FinaleStep({ step, onNext, onBack }: Omit<RouteStepPageProps, 'o
         {step.body && <BodyText body={step.body} />}
         <div className={styles.playerBlock}>
           <img src={assets.finaleCat} alt="" className={styles.finaleCat} />
-          {step.hasAudio !== false && <AudioPlayer src={step.audioUrl} />}
+          {step.hasAudio !== false && <AudioPlayer src={step.audioUrl} persist />}
         </div>
       </div>
       <StepFooter>

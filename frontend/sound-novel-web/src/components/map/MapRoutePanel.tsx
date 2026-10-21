@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import {
   MAP_2GIS_OPEN_URL,
   MAPMAGIC_ROUTE_URL,
@@ -12,6 +13,28 @@ interface MapRoutePanelProps {
 }
 
 export function MapRoutePanel({ large = false }: MapRoutePanelProps) {
+  const [geoStatus, setGeoStatus] = useState<'idle' | 'loading' | 'error'>('idle')
+
+  const locateMe = () => {
+    if (!navigator.geolocation) {
+      setGeoStatus('error')
+      return
+    }
+    setGeoStatus('loading')
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        setGeoStatus('idle')
+        const { latitude, longitude } = position.coords
+        const url = `https://yandex.ru/maps/?ll=${longitude},${latitude}&z=16&pt=${longitude},${latitude}`
+        window.open(url, '_blank', 'noopener,noreferrer')
+      },
+      () => {
+        setGeoStatus('error')
+      },
+      { enableHighAccuracy: true, timeout: 12000, maximumAge: 30000 },
+    )
+  }
+
   return (
     <div className={styles.root}>
       <div className={`${styles.mapFrame} ${large ? styles.mapFrameLarge : ''}`}>
@@ -50,7 +73,18 @@ export function MapRoutePanel({ large = false }: MapRoutePanelProps) {
         >
           MapMagic
         </a>
+        <button
+          type="button"
+          className={styles.openButton}
+          onClick={locateMe}
+          disabled={geoStatus === 'loading'}
+        >
+          {geoStatus === 'loading' ? 'Определяем…' : 'Моё местоположение'}
+        </button>
       </div>
+      {geoStatus === 'error' && (
+        <p className={styles.geoError}>Не удалось определить геолокацию. Разрешите доступ в настройках браузера.</p>
+      )}
 
       <ol className={`${styles.list} ${large ? '' : styles.listModal}`}>
         {routePoints.map((point, index) => (
