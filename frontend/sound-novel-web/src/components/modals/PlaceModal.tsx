@@ -193,7 +193,7 @@ function MaterialBlock({ material }: { material: PlaceMaterial }) {
     return (
       <article className={styles.card}>
         <TitleBlock title={material.title} />
-        {material.audioUrl && <AudioPlayer src={material.audioUrl} preload="none" />}
+        {material.audioUrl && <AudioPlayer src={material.audioUrl} persist preload="none" />}
         <TextSection material={material} />
       </article>
     )
@@ -236,7 +236,7 @@ function MaterialBlock({ material }: { material: PlaceMaterial }) {
         </>
       )}
 
-      {material.audioUrl && <AudioPlayer src={material.audioUrl} preload="none" />}
+      {material.audioUrl && <AudioPlayer src={material.audioUrl} persist preload="none" />}
 
       <TextSection material={material} />
     </article>
